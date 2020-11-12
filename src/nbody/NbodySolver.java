@@ -12,7 +12,7 @@ public class NbodySolver {
 
     public NbodySolver(Point[] bodiesCoords, final int DT) {
 
-        if (bodiesCoords.length < MIN_N || bodiesCoords.length > MAX_N) {
+        if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
         }
 

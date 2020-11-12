@@ -29,7 +29,7 @@ public class Frame extends JFrame {
 
     private void initGui() {
 
-        nbody.Point[] points = new nbody.Point[NbodySolvers.MIN_N];
+        nbody.Point[] points = new nbody.Point[NbodySolvers.MIN_BODIES_NUM];
         int x, y;
         Random random = new Random();
 

@@ -4,8 +4,8 @@ public class NbodySolvers {
 
     public static final double G = 6.67e-11;
 
-    public static final int MIN_N = 3;
-    public static final int MAX_N = 5;
+    public static final int MIN_BODIES_NUM = 2;
+    public static final int MAX_BODIES_NUM = 10;
 
     public static final double MIN_M = 1e9;
     public static final double MAX_M = 3e15;
