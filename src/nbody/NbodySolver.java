@@ -54,21 +54,21 @@ public class NbodySolver {
         double magnitude;
         Point direction;
 
-        final int N = b.length;
-        for (int i = 0; i < N - 1; i++) {
-            for (int j = i + 1; j < N; j++) {
-                distance = distance(b[i], b[j]);
-                magnitude = magnitude(b[i], b[j], distance);
-                direction = direction(b[i], b[j]);
+        final int n = b.length;
+        for (int k = 0; k < n - 1; k++) {
+            for (int l = k + 1; l < n; l++) {
+                distance = distance(b[k], b[l]);
+                magnitude = magnitude(b[k], b[l], distance);
+                direction = direction(b[k], b[l]);
 
-                b[i].setF(
-                        b[i].f().x() + magnitude * direction.x() / distance,
-                        b[i].f().y() + magnitude * direction.y() / distance
+                b[k].setF(
+                        b[k].f().x() + magnitude * direction.x() / distance,
+                        b[k].f().y() + magnitude * direction.y() / distance
                 );
 
-                b[j].setF(
-                        b[i].f().x() - magnitude * direction.x() / distance,
-                        b[i].f().y() - magnitude * direction.y() / distance
+                b[l].setF(
+                        b[l].f().x() - magnitude * direction.x() / distance,
+                        b[l].f().y() - magnitude * direction.y() / distance
                 );
             }
         }
