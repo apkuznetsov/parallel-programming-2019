@@ -28,7 +28,7 @@ public class NbodySolver {
         dt = deltaTime;
     }
 
-    public int N() {
+    public int n() {
         return b.length;
     }
 

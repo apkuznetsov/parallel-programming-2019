@@ -28,7 +28,7 @@ public class Surface extends JPanel implements ActionListener {
         Graphics2D graphics = (Graphics2D) gr;
         graphics.setPaint(POINT_COLOR);
 
-        for (int i = 0; i < solver.N(); i++) {
+        for (int i = 0; i < solver.n(); i++) {
             int x = solver.bodyX(i);
             int y = solver.bodyY(i);
             graphics.fillOval(x, y, POINT_SIZE, POINT_SIZE);
