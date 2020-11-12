@@ -1,6 +1,6 @@
 package nbody;
 
-import nbody.exceptions.DTOutOfBoundsException;
+import nbody.exceptions.DeltaTimeOutOfBoundsException;
 import nbody.exceptions.NOutOfBoundsException;
 
 import static nbody.NbodySolvers.*;
@@ -17,7 +17,7 @@ public class NbodySolver {
         }
 
         if (DT < MIN_DT || DT > MAX_DT) {
-            throw new DTOutOfBoundsException();
+            throw new DeltaTimeOutOfBoundsException();
         }
 
         b = new Body[N];
