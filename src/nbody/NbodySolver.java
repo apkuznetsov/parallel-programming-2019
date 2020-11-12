@@ -10,9 +10,9 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
 
-    public NbodySolver(Point[] point, final int DT) {
+    public NbodySolver(Point[] bodiesCoords, final int DT) {
 
-        if (point.length < MIN_N || point.length > MAX_N) {
+        if (bodiesCoords.length < MIN_N || bodiesCoords.length > MAX_N) {
             throw new BodiesNumOutOfBoundsException();
         }
 
@@ -20,9 +20,9 @@ public class NbodySolver {
             throw new DeltaTimeOutOfBoundsException();
         }
 
-        b = new Body[point.length];
+        b = new Body[bodiesCoords.length];
         for (int i = 0; i < b.length; i++) {
-            b[i] = new Body(point[i].x(), point[i].y());
+            b[i] = new Body(bodiesCoords[i]);
         }
 
         dt = DT;

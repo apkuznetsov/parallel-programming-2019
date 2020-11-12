@@ -8,9 +8,9 @@ public class Body {
     private Point p;
     private Point v;
     private Point f;
-    
-    public Body(double x, double y) {
-        p = new Point(x, y);
+
+    public Body(Point xyCoords) {
+        p = xyCoords;
         v = new Point(0.0, 0.0);
         f = new Point(0.0, 0.0);
         m = MIN_M;
