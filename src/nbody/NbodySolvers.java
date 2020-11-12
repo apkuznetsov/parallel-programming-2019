@@ -12,6 +12,7 @@ public class NbodySolvers {
 
     private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
+    private static final Coords optdMemAllocDp = new Coords(0.0, 0.0);
 
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
@@ -40,9 +41,11 @@ public class NbodySolvers {
     }
 
     public static Coords dp(Body b, long dt, Coords dv) {
-        return new Coords(
+        optdMemAllocDp.set(
                 (b.v().x() + dv.x() / 2) * dt,
                 (b.v().y() + dv.y() / 2) * dt
         );
+
+        return optdMemAllocDp;
     }
 }
