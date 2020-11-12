@@ -22,4 +22,8 @@ public class Coords {
         this.x = x;
         this.y = y;
     }
+
+    public Coords clone() {
+        return new Coords(x, y);
+    }
 }

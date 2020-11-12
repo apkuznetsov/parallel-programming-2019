@@ -11,7 +11,7 @@ public class Body {
 
     public Body(Coords xyCoords) {
         m = MIN_MASS;
-        p = xyCoords;
+        p = xyCoords.clone();
         v = new Coords(0.0, 0.0);
         f = new Coords(0.0, 0.0);
     }
