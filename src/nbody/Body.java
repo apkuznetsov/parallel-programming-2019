@@ -5,15 +5,15 @@ import static nbody.NbodySolvers.MIN_MASS;
 public class Body {
 
     private final double m;
-    private Point p;
-    private Point v;
-    private Point f;
+    private final Point p;
+    private final Point v;
+    private final Point f;
 
     public Body(Point xyCoords) {
+        m = MIN_MASS;
         p = xyCoords;
         v = new Point(0.0, 0.0);
         f = new Point(0.0, 0.0);
-        m = MIN_MASS;
     }
 
     public Point p() {
@@ -29,15 +29,15 @@ public class Body {
     }
 
     public void setP(double x, double y) {
-        this.p = new Point(x, y);
+        p.set(x, y);
     }
 
     public void setV(double x, double y) {
-        this.v = new Point(x, y);
+        v.set(x, y);
     }
 
     public void setF(double x, double y) {
-        this.f = new Point(x, y);
+        f.set(x, y);
     }
 
     public double m() {
