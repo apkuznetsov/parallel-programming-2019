@@ -3,8 +3,6 @@ import nbody.NbodySolver;
 import nbody.NbodySolvers;
 import nbodygui.Frame;
 import nbodygui.Frames;
-import nbodygui.Panel;
-import nbodygui.Panels;
 
 import java.awt.*;
 import java.util.Random;
@@ -12,25 +10,25 @@ import java.util.Random;
 public class App {
 
     public static void main(String[] args) {
-        Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100));
-
+        final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100);
+        final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
         final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
-        final nbodygui.Panel panel = new Panel(solver);
 
-        Frame frame = new Frame(panel);
+        final nbodygui.Panel panel = new nbodygui.Panel(solver);
+        final Frame frame = new Frame(panel);
         frame.setVisible(true);
     }
 
-    public static Coords[] randomCoordsArr(int num, Dimension bounds) {
+    public static Coords[] randomCoordsArr(int num, Dimension coordsBounds) {
 
-        Coords[] randomCoordsArr = new Coords[num];
+        final Coords[] randomCoordsArr = new Coords[num];
 
         int x, y;
-        Random random = new Random();
+        final Random random = new Random();
 
         for (int i = 0; i < randomCoordsArr.length; i++) {
-            x = Math.abs(random.nextInt()) % bounds.width;
-            y = Math.abs(random.nextInt()) % bounds.height;
+            x = Math.abs(random.nextInt()) % coordsBounds.width;
+            y = Math.abs(random.nextInt()) % coordsBounds.height;
             randomCoordsArr[i] = new Coords(x, y);
         }
 
