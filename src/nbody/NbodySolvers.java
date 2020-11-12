@@ -11,6 +11,7 @@ public class NbodySolvers {
     public static final int MAX_DELTA_TIME = 128;
 
     private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
+    private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
 
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
@@ -31,10 +32,11 @@ public class NbodySolvers {
     }
 
     public static Coords dv(Body b, long dt) {
-        return new Coords(
+        optdMemAllocDv.set(
                 b.f().x() / b.m() * dt,
-                b.f().y() / b.m() * dt
-        );
+                b.f().y() / b.m() * dt);
+
+        return optdMemAllocDv;
     }
 
     public static Coords dp(Body b, long dt, Coords dv) {
