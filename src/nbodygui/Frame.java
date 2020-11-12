@@ -11,13 +11,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 
-import static nbodygui.Panels.TITLE;
-
 public class Frame extends JFrame {
 
     public Frame() {
-        super(TITLE);
-        initGui();
+        super(Panels.TITLE);
+        init();
     }
 
     public static void main(String[] args) {
