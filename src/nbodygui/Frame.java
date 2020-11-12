@@ -8,14 +8,8 @@ public class Frame extends JFrame {
 
     public Frame(Panel panel) {
         super(Panels.DEFAULT_TITLE);
-        init(panel);
-    }
-
-    private void init(Panel panel) {
-
 
         add(panel);
-
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
