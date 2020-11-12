@@ -4,11 +4,10 @@ import java.awt.*;
 
 public class Panels {
 
-    public static final String TITLE = "n-body problem solver";
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final String DEFAULT_TITLE = "n-body problem solver";
+    public static final int DEFAULT_WIDTH = 500;
+    public static final int DEFAULT_HEIGHT = 500;
 
-    public static final Color POINT_COLOR = Color.BLUE;
-    public static final int POINT_SIZE = 20;
-    public static final int MAX_POINTS_NUM = 5;
+    public static final Color DEFAULT_POINT_COLOR = Color.BLACK;
+    public static final int DEFAULT_POINT_SIZE = 10;
 }

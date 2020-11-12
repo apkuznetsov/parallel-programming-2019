@@ -1,11 +1,10 @@
 package nbodygui;
 
 import nbody.Coords;
-import nbody.NbodySolvers;
 import nbody.NbodySolver;
+import nbody.NbodySolvers;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -14,7 +13,7 @@ import java.util.Random;
 public class Frame extends JFrame {
 
     public Frame() {
-        super(Panels.TITLE);
+        super(Panels.DEFAULT_TITLE);
         init();
     }
 
@@ -33,8 +32,8 @@ public class Frame extends JFrame {
         Random random = new Random();
 
         for (int i = 0; i < coords.length; i++) {
-            x = Math.abs(random.nextInt()) % Panels.WIDTH;
-            y = Math.abs(random.nextInt()) % Panels.HEIGHT;
+            x = Math.abs(random.nextInt()) % Panels.DEFAULT_WIDTH;
+            y = Math.abs(random.nextInt()) % Panels.DEFAULT_HEIGHT;
             coords[i] = new Coords(x, y);
         }
 
@@ -50,7 +49,7 @@ public class Frame extends JFrame {
             }
         });
 
-        setSize(Panels.WIDTH, Panels.HEIGHT);
+        setSize(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

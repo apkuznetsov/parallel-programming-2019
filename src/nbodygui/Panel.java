@@ -7,7 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static nbodygui.Panels.*;
+import static nbodygui.Panels.DEFAULT_POINT_COLOR;
+import static nbodygui.Panels.DEFAULT_POINT_SIZE;
 
 public class Panel extends JPanel implements ActionListener {
 
@@ -26,12 +27,12 @@ public class Panel extends JPanel implements ActionListener {
 
     private void drawRandomPoints(Graphics gr) {
         Graphics2D graphics = (Graphics2D) gr;
-        graphics.setPaint(POINT_COLOR);
+        graphics.setPaint(DEFAULT_POINT_COLOR);
 
         for (int i = 0; i < solver.n(); i++) {
             int x = solver.bodyX(i);
             int y = solver.bodyY(i);
-            graphics.fillOval(x, y, POINT_SIZE, POINT_SIZE);
+            graphics.fillOval(x, y, DEFAULT_POINT_SIZE, DEFAULT_POINT_SIZE);
         }
     }
 
