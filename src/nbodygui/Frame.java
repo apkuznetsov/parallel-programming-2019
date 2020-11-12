@@ -4,6 +4,7 @@ import nbody.NbodySolvers;
 import nbody.NbodySolver;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -28,17 +29,17 @@ public class Frame extends JFrame {
 
     private void initGui() {
 
-        Point[] point = new Point[NbodySolvers.MIN_N];
+        nbody.Point[] points = new nbody.Point[NbodySolvers.MIN_N];
         int x, y;
         Random random = new Random();
 
-        for (int i = 0; i < point.length; i++) {
+        for (int i = 0; i < points.length; i++) {
             x = Math.abs(random.nextInt()) % Surfaces.WIDTH;
             y = Math.abs(random.nextInt()) % Surfaces.HEIGHT;
-            point[i] = new Point(x, y);
+            points[i] = new nbody.Point(x, y);
         }
 
-        final NbodySolver solver = new NbodySolver(point.length, NbodySolvers.MIN_DT, point);
+        final NbodySolver solver = new NbodySolver(points, NbodySolvers.MIN_DT);
         final Surface surface = new Surface(solver);
         add(surface);
 
