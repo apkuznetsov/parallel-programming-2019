@@ -1,14 +1,8 @@
 package nbodygui;
 
-import nbody.Coords;
-import nbody.NbodySolver;
-import nbody.NbodySolvers;
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Random;
 
 public class Frame extends JFrame {
 
@@ -34,21 +28,5 @@ public class Frame extends JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    private Coords[] randomCoordsArr(int num, Dimension bounds) {
-
-        Coords[] randomCoordsArr = new Coords[num];
-
-        int x, y;
-        Random random = new Random();
-
-        for (int i = 0; i < randomCoordsArr.length; i++) {
-            x = Math.abs(random.nextInt()) % bounds.width;
-            y = Math.abs(random.nextInt()) % bounds.height;
-            randomCoordsArr[i] = new Coords(x, y);
-        }
-
-        return randomCoordsArr;
     }
 }
