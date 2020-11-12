@@ -1,5 +1,6 @@
 package nbodygui;
 
+import nbody.Coords;
 import nbody.NbodySolvers;
 import nbody.NbodySolver;
 
@@ -29,17 +30,17 @@ public class Frame extends JFrame {
 
     private void initGui() {
 
-        nbody.Point[] points = new nbody.Point[NbodySolvers.MIN_BODIES_NUM];
+        Coords[] coords = new Coords[NbodySolvers.MIN_BODIES_NUM];
         int x, y;
         Random random = new Random();
 
-        for (int i = 0; i < points.length; i++) {
+        for (int i = 0; i < coords.length; i++) {
             x = Math.abs(random.nextInt()) % Surfaces.WIDTH;
             y = Math.abs(random.nextInt()) % Surfaces.HEIGHT;
-            points[i] = new nbody.Point(x, y);
+            coords[i] = new Coords(x, y);
         }
 
-        final NbodySolver solver = new NbodySolver(points, NbodySolvers.MIN_DELTA_TIME);
+        final NbodySolver solver = new NbodySolver(coords, NbodySolvers.MIN_DELTA_TIME);
         final Surface surface = new Surface(solver);
         add(surface);
 

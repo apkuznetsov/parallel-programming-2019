@@ -10,7 +10,7 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
 
-    public NbodySolver(Point[] bodiesCoords, int deltaTime) {
+    public NbodySolver(Coords[] bodiesCoords, int deltaTime) {
 
         if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
@@ -52,7 +52,7 @@ public class NbodySolver {
     private void recalcBodiesForces() {
         double distance;
         double magnitude;
-        Point direction;
+        Coords direction;
 
         final int n = b.length;
         for (int k = 0; k < n - 1; k++) {
@@ -75,8 +75,8 @@ public class NbodySolver {
     }
 
     private void moveNBodies() {
-        Point dv; // dv = f/m * dt
-        Point dp; // dp = (v + dv/2) * dt
+        Coords dv; // dv = f/m * dt
+        Coords dp; // dp = (v + dv/2) * dt
 
         for (Body body : b) {
             dv = dv(body, dt);

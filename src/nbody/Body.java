@@ -5,26 +5,26 @@ import static nbody.NbodySolvers.MIN_MASS;
 public class Body {
 
     private final double m;
-    private final Point p;
-    private final Point v;
-    private final Point f;
+    private final Coords p;
+    private final Coords v;
+    private final Coords f;
 
-    public Body(Point xyCoords) {
+    public Body(Coords xyCoords) {
         m = MIN_MASS;
         p = xyCoords;
-        v = new Point(0.0, 0.0);
-        f = new Point(0.0, 0.0);
+        v = new Coords(0.0, 0.0);
+        f = new Coords(0.0, 0.0);
     }
 
-    public Point p() {
+    public Coords p() {
         return p;
     }
 
-    public Point v() {
+    public Coords v() {
         return v;
     }
 
-    public Point f() {
+    public Coords f() {
         return f;
     }
 

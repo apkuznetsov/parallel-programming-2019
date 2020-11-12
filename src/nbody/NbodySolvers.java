@@ -23,22 +23,22 @@ public class NbodySolvers {
         return G * b1.m() * b2.m() / Math.pow(b1b2distance, 2);
     }
 
-    public static Point direction(Body b1, Body b2) {
-        return new Point(
+    public static Coords direction(Body b1, Body b2) {
+        return new Coords(
                 b2.p().x() - b1.p().x(),
                 b2.p().y() - b1.p().y()
         );
     }
 
-    public static Point dv(Body b, long dt) {
-        return new Point(
+    public static Coords dv(Body b, long dt) {
+        return new Coords(
                 b.f().x() / b.m() * dt,
                 b.f().y() / b.m() * dt
         );
     }
 
-    public static Point dp(Body b, long dt, Point dv) {
-        return new Point(
+    public static Coords dp(Body b, long dt, Coords dv) {
+        return new Coords(
                 (b.v().x() + dv.x() / 2) * dt,
                 (b.v().y() + dv.y() / 2) * dt
         );

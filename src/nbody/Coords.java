@@ -1,16 +1,16 @@
 package nbody;
 
-public class Point {
+public class Coords {
 
     private double x;
     private double y;
 
-    public Point() {
+    public Coords() {
         x = 0.0;
         y = 0.0;
     }
 
-    public Point(double x, double y) {
+    public Coords(double x, double y) {
         this.x = x;
         this.y = y;
     }
