@@ -12,32 +12,24 @@ import java.util.Random;
 
 public class Frame extends JFrame {
 
-    public Frame() {
+    public Frame(int pointsNum) {
         super(Panels.DEFAULT_TITLE);
-        init();
+        init(pointsNum);
     }
 
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            Frame frame = new Frame();
+            Frame frame = new Frame(NbodySolvers.MIN_BODIES_NUM);
             frame.setVisible(true);
         });
     }
 
-    private void initGui() {
+    private void init(int pointsNum) {
 
-        Coords[] coords = new Coords[NbodySolvers.MIN_BODIES_NUM];
-        int x, y;
-        Random random = new Random();
+        Coords[] randomCoordsArr = randomCoordsArr(pointsNum, new Dimension(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT));
 
-        for (int i = 0; i < coords.length; i++) {
-            x = Math.abs(random.nextInt()) % Panels.DEFAULT_WIDTH;
-            y = Math.abs(random.nextInt()) % Panels.DEFAULT_HEIGHT;
-            coords[i] = new Coords(x, y);
-        }
-
-        final NbodySolver solver = new NbodySolver(coords, NbodySolvers.MIN_DELTA_TIME);
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
         final Panel panel = new Panel(solver);
         add(panel);
 
