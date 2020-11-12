@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import static nbodygui.Surfaces.*;
 
@@ -17,7 +16,7 @@ public class Surface extends JPanel implements ActionListener {
 
     public Surface(NbodySolver solver) {
         this.solver = solver;
-        timer = new Timer(solver.DT(), this);
+        timer = new Timer(solver.dt(), this);
         timer.start();
     }
 
