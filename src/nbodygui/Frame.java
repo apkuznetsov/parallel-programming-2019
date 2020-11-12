@@ -17,11 +17,6 @@ public class Frame extends JFrame {
         init(pointsNum);
     }
 
-    public static void main(String[] args) {
-        Frame frame = new Frame(NbodySolvers.MIN_BODIES_NUM);
-        frame.setVisible(true);
-    }
-
     private void init(int pointsNum) {
 
         Coords[] randomCoordsArr = randomCoordsArr(pointsNum, new Dimension(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT));
