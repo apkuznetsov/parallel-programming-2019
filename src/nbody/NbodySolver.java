@@ -45,11 +45,11 @@ public class NbodySolver {
     }
 
     public void recalcBodiesCoords() {
-        calcNForces();
+        recalcBodiesForces();
         moveNBodies();
     }
 
-    private void calcNForces() {
+    private void recalcBodiesForces() {
         double distance;
         double magnitude;
         Point direction;
