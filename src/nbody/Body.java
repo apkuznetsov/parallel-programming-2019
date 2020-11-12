@@ -8,14 +8,7 @@ public class Body {
     private Point p;
     private Point v;
     private Point f;
-
-    public Body() {
-        p = new Point(0.0, 0.0);
-        v = new Point(0.0, 0.0);
-        f = new Point(0.0, 0.0);
-        m = MIN_M;
-    }
-
+    
     public Body(double x, double y) {
         p = new Point(x, y);
         v = new Point(0.0, 0.0);
