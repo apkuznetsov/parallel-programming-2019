@@ -10,8 +10,8 @@ public class NbodySolvers {
     public static final int MIN_DELTA_TIME = 16;
     public static final int MAX_DELTA_TIME = 128;
 
-    public static final double MIN_M = 1e9;
-    public static final double MAX_M = 3e15;
+    public static final double MIN_MASS = 1e10;
+    public static final double MAX_MASS = 9e10;
 
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(

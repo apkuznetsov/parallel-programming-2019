@@ -1,6 +1,6 @@
 package nbody;
 
-import static nbody.NbodySolvers.MIN_M;
+import static nbody.NbodySolvers.MIN_MASS;
 
 public class Body {
 
@@ -13,7 +13,7 @@ public class Body {
         p = xyCoords;
         v = new Point(0.0, 0.0);
         f = new Point(0.0, 0.0);
-        m = MIN_M;
+        m = MIN_MASS;
     }
 
     public Point p() {
