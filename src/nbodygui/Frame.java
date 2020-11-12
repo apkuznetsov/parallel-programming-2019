@@ -12,17 +12,14 @@ import java.util.Random;
 
 public class Frame extends JFrame {
 
-    public Frame(int pointsNum) {
+    public Frame(Panel panel) {
         super(Panels.DEFAULT_TITLE);
-        init(pointsNum);
+        init(panel);
     }
 
-    private void init(int pointsNum) {
+    private void init(Panel panel) {
 
-        Coords[] randomCoordsArr = randomCoordsArr(pointsNum, new Dimension(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT));
 
-        final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
-        final Panel panel = new Panel(solver);
         add(panel);
 
         addWindowListener(new WindowAdapter() {

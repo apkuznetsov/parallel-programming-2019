@@ -1,6 +1,9 @@
 import nbody.Coords;
+import nbody.NbodySolver;
 import nbody.NbodySolvers;
 import nbodygui.Frame;
+import nbodygui.Panel;
+import nbodygui.Panels;
 
 import java.awt.*;
 import java.util.Random;
@@ -8,7 +11,12 @@ import java.util.Random;
 public class App {
 
     public static void main(String[] args) {
-        Frame frame = new Frame(NbodySolvers.MIN_BODIES_NUM);
+        Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, new Dimension(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT));
+
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
+        final nbodygui.Panel panel = new Panel(solver);
+
+        Frame frame = new Frame(panel);
         frame.setVisible(true);
     }
 
