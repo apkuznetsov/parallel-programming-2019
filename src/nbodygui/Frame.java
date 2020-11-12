@@ -18,11 +18,8 @@ public class Frame extends JFrame {
     }
 
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(() -> {
-            Frame frame = new Frame(NbodySolvers.MIN_BODIES_NUM);
-            frame.setVisible(true);
-        });
+        Frame frame = new Frame(NbodySolvers.MIN_BODIES_NUM);
+        frame.setVisible(true);
     }
 
     private void init(int pointsNum) {
@@ -41,7 +38,7 @@ public class Frame extends JFrame {
             }
         });
 
-        setSize(Panels.DEFAULT_WIDTH, Panels.DEFAULT_HEIGHT);
+        setSize(Panels.DEFAULT_WIDTH + 100, Panels.DEFAULT_HEIGHT + 100);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

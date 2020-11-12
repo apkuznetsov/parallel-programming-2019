@@ -4,7 +4,7 @@ import static nbody.Bodies.G;
 
 public class NbodySolvers {
 
-    public static final int MIN_BODIES_NUM = 2;
+    public static final int MIN_BODIES_NUM = 4;
     public static final int MAX_BODIES_NUM = 16;
 
     public static final int MIN_DELTA_TIME = 16;
