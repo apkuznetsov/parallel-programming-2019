@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 public class Frame extends JFrame {
 
     public Frame(Panel panel) {
-        super(Panels.DEFAULT_TITLE);
+        super(Frames.DEFAULT_TITLE);
 
         add(panel);
         addWindowListener(new WindowAdapter() {
@@ -18,7 +18,7 @@ public class Frame extends JFrame {
             }
         });
 
-        setSize(Panels.DEFAULT_WIDTH + 100, Panels.DEFAULT_HEIGHT + 100);
+        setSize(Frames.DEFAULT_WIDTH, Frames.DEFAULT_HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
