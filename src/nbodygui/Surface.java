@@ -38,7 +38,7 @@ public class Surface extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        solver.recalcNBodiesCoords();
+        solver.recalcBodiesCoords();
         drawRandomPoints(gr);
     }
 

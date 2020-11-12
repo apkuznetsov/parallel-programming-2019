@@ -44,7 +44,7 @@ public class NbodySolver {
         return (int) b[index].p().y();
     }
 
-    public void recalcNBodiesCoords() {
+    public void recalcBodiesCoords() {
         calcNForces();
         moveNBodies();
     }
