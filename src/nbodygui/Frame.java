@@ -41,13 +41,13 @@ public class Frame extends JFrame {
         }
 
         final NbodySolver solver = new NbodySolver(coords, NbodySolvers.MIN_DELTA_TIME);
-        final Surface surface = new Surface(solver);
-        add(surface);
+        final Panel panel = new Panel(solver);
+        add(panel);
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                Timer timer = surface.timer();
+                Timer timer = panel.timer();
                 timer.stop();
             }
         });

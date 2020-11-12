@@ -9,12 +9,12 @@ import java.awt.event.ActionListener;
 
 import static nbodygui.Surfaces.*;
 
-public class Surface extends JPanel implements ActionListener {
+public class Panel extends JPanel implements ActionListener {
 
     private final NbodySolver solver;
     private final Timer timer;
 
-    public Surface(NbodySolver solver) {
+    public Panel(NbodySolver solver) {
         this.solver = solver;
         timer = new Timer(solver.dt(), this);
         timer.start();
