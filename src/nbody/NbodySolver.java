@@ -16,7 +16,7 @@ public class NbodySolver {
             throw new BodiesNumOutOfBoundsException();
         }
 
-        if (deltaTime < MIN_DT || deltaTime > MAX_DT) {
+        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
             throw new DeltaTimeOutOfBoundsException();
         }
 

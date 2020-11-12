@@ -39,7 +39,7 @@ public class Frame extends JFrame {
             points[i] = new nbody.Point(x, y);
         }
 
-        final NbodySolver solver = new NbodySolver(points, NbodySolvers.MIN_DT);
+        final NbodySolver solver = new NbodySolver(points, NbodySolvers.MIN_DELTA_TIME);
         final Surface surface = new Surface(solver);
         add(surface);
 
