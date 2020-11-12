@@ -1,6 +1,6 @@
 package nbody;
 
-import static nbody.NbodySolvers.MIN_MASS;
+import static nbody.Bodies.MIN_MASS;
 
 public class Body {
 
