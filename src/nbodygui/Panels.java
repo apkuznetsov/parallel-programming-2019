@@ -2,7 +2,7 @@ package nbodygui;
 
 import java.awt.*;
 
-public class Surfaces {
+public class Panels {
 
     public static final String TITLE = "n-body problem solver";
     public static final int WIDTH = 500;

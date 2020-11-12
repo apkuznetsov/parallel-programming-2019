@@ -11,7 +11,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 
-import static nbodygui.Surfaces.TITLE;
+import static nbodygui.Panels.TITLE;
 
 public class Frame extends JFrame {
 
@@ -35,8 +35,8 @@ public class Frame extends JFrame {
         Random random = new Random();
 
         for (int i = 0; i < coords.length; i++) {
-            x = Math.abs(random.nextInt()) % Surfaces.WIDTH;
-            y = Math.abs(random.nextInt()) % Surfaces.HEIGHT;
+            x = Math.abs(random.nextInt()) % Panels.WIDTH;
+            y = Math.abs(random.nextInt()) % Panels.HEIGHT;
             coords[i] = new Coords(x, y);
         }
 
@@ -52,7 +52,7 @@ public class Frame extends JFrame {
             }
         });
 
-        setSize(Surfaces.WIDTH, Surfaces.HEIGHT);
+        setSize(Panels.WIDTH, Panels.HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
