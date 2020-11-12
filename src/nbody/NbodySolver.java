@@ -1,7 +1,7 @@
 package nbody;
 
 import nbody.exceptions.DeltaTimeOutOfBoundsException;
-import nbody.exceptions.NOutOfBoundsException;
+import nbody.exceptions.BodiesNumOutOfBoundsException;
 
 import static nbody.NbodySolvers.*;
 
@@ -13,7 +13,7 @@ public class NbodySolver {
     public NbodySolver(final int N, final int DT, java.awt.Point[] point) {
 
         if (N < MIN_N || N > MAX_N) {
-            throw new NOutOfBoundsException();
+            throw new BodiesNumOutOfBoundsException();
         }
 
         if (DT < MIN_DT || DT > MAX_DT) {
