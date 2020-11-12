@@ -1,6 +1,6 @@
 package nbodygui;
 
-import nbody.Bodies;
+import nbody.NbodySolvers;
 import nbody.NbodySolver;
 
 import javax.swing.*;
@@ -28,7 +28,7 @@ public class Frame extends JFrame {
 
     private void initGui() {
 
-        Point[] point = new Point[Bodies.MIN_N];
+        Point[] point = new Point[NbodySolvers.MIN_N];
         int x, y;
         Random random = new Random();
 
@@ -38,7 +38,7 @@ public class Frame extends JFrame {
             point[i] = new Point(x, y);
         }
 
-        final NbodySolver solver = new NbodySolver(point.length, Bodies.MIN_DT, point);
+        final NbodySolver solver = new NbodySolver(point.length, NbodySolvers.MIN_DT, point);
         final Surface surface = new Surface(solver);
         add(surface);
 

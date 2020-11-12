@@ -3,7 +3,7 @@ package nbody;
 import nbody.exceptions.DTOutOfBoundsException;
 import nbody.exceptions.NOutOfBoundsException;
 
-import static nbody.Bodies.*;
+import static nbody.NbodySolvers.*;
 
 public class NbodySolver {
 
@@ -16,7 +16,7 @@ public class NbodySolver {
             throw new NOutOfBoundsException();
         }
 
-        if (DT < MIN_DT|| DT > MAX_DT) {
+        if (DT < MIN_DT || DT > MAX_DT) {
             throw new DTOutOfBoundsException();
         }
 

@@ -1,6 +1,6 @@
 package nbody;
 
-public class Bodies {
+public class NbodySolvers {
 
     public static final double G = 6.67e-11;
 

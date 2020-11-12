@@ -1,9 +1,6 @@
 package nbody;
 
-import nbody.exceptions.MOutOfBoundsException;
-
-import static nbody.Bodies.MAX_M;
-import static nbody.Bodies.MIN_M;
+import static nbody.NbodySolvers.MIN_M;
 
 public class Body {
 
