@@ -1,14 +1,14 @@
 package nbodygui;
 
 import nbody.NbodySolver;
+import nbodygui.exceptions.DurationMillisOutOfBoundsException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static nbodygui.Panels.DEFAULT_POINT_COLOR;
-import static nbodygui.Panels.DEFAULT_POINT_SIZE;
+import static nbodygui.Panels.*;
 
 public class Panel extends JPanel implements ActionListener {
 
@@ -18,6 +18,10 @@ public class Panel extends JPanel implements ActionListener {
     private int consumedMillis;
 
     public Panel(NbodySolver solver, int durationMillis) {
+        if (durationMillis < MIN_DURATION_MILLIS || durationMillis > MAX_DURATION_MILLIS) {
+            throw new DurationMillisOutOfBoundsException();
+        }
+
         this.solver = solver;
         timer = new Timer(solver.dt(), this);
         timer.start();
