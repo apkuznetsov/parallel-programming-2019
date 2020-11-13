@@ -19,12 +19,13 @@ public class App {
         final int parsedWidth = (parser.width() == null) ? Frames.DEFAULT_WIDTH : parser.width();
         final int parsedHeight = (parser.height() == null) ? Frames.DEFAULT_HEIGHT : parser.height();
         final int parsedBodiesNum = (parser.bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : parser.bodiesNum();
+        final double parsedBodyMass = (parser.bodyMass() == null) ? Bodies.DEFAULT_BODY_MASS : parser.bodyMass();
         final int parsedDeltaTime = (parser.deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : parser.deltaTime();
         final int parsedDurationMillis = (parser.durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : parser.durationMillis();
 
         final Dimension coordsBounds = new Dimension(parsedWidth - 100, parsedHeight - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(parsedBodiesNum, coordsBounds);
-        final NbodySolver solver = new NbodySolver(randomCoordsArr, parsedDeltaTime);
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, parsedBodyMass, parsedDeltaTime);
 
         final Panel panel = new Panel(solver, parsedDurationMillis);
 

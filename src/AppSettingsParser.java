@@ -7,6 +7,7 @@ public class AppSettingsParser {
     private static final String WIDTH_TAG_NAME = "width";
     private static final String HEIGHT_TAG_NAME = "height";
     private static final String BODIES_NUM_TAG_NAME = "bodiesNum";
+    private static final String BODY_MASS_TAG_NAME = "bodyMass";
     private static final String DELTA_TIME_TAG_NAME = "deltaTime";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
 
@@ -44,6 +45,16 @@ public class AppSettingsParser {
             bodiesNum = null;
         }
         return bodiesNum;
+    }
+
+    public Double bodyMass() {
+        Double bodyMass;
+        try {
+            bodyMass = Double.parseDouble(value(BODY_MASS_TAG_NAME));
+        } catch (NumberFormatException | NullPointerException e) {
+            bodyMass = null;
+        }
+        return bodyMass;
     }
 
     public Integer deltaTime() {

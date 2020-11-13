@@ -10,7 +10,7 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
 
-    public NbodySolver(Coords[] bodiesCoords, int deltaTime) {
+    public NbodySolver(Coords[] bodiesCoords, double bodyMass, int deltaTime) {
 
         if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
@@ -22,7 +22,7 @@ public class NbodySolver {
 
         b = new Body[bodiesCoords.length];
         for (int i = 0; i < b.length; i++) {
-            b[i] = new Body(bodiesCoords[i]);
+            b[i] = new Body(bodiesCoords[i], bodyMass);
         }
 
         dt = deltaTime;
