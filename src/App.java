@@ -14,7 +14,8 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        final AppSettingsParser settingsParser = new AppSettingsParser();
+        final AppSettingsParser parser = new AppSettingsParser();
+        Integer durationMillis = parser.durationMillis();
 
         final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
