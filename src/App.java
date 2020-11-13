@@ -3,8 +3,8 @@ import nbody.NbodySolver;
 import nbody.NbodySolvers;
 import nbodygui.Frame;
 import nbodygui.Frames;
-import nbodygui.panel.Panel;
-import nbodygui.panel.Panels;
+import nbodygui.Panel;
+import nbodygui.Panels;
 
 import java.awt.*;
 import java.io.IOException;

@@ -2,7 +2,6 @@ package nbodygui;
 
 import nbodygui.exceptions.HeightOutOfBoundsException;
 import nbodygui.exceptions.WidthOutOfBoundsException;
-import nbodygui.panel.Panel;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
