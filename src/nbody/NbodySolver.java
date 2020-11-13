@@ -58,7 +58,7 @@ public class NbodySolver {
         for (int k = 0; k < n - 1; k++) {
             for (int l = k + 1; l < n; l++) {
                 distance = distance(b[k], b[l]);
-                magnitude = magnitude(b[k], b[l], distance);
+                magnitude = (distance < 100.0) ? 0.0 : magnitude(b[k], b[l], distance);
                 direction = direction(b[k], b[l]);
 
                 b[k].setF(
