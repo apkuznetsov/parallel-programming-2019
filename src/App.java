@@ -10,21 +10,21 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 
-
 public class App {
 
     public static void main(String[] args) throws IOException {
 
         final AppSettingsParser parser = new AppSettingsParser();
+        final int parsedHeight = (parser.height() == null) ? Frames.DEFAULT_HEIGHT : parser.height();
         final int parsedDurationMillis = (parser.durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : parser.durationMillis();
 
-        final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100);
+        final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, parsedHeight - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
         final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
 
         final Panel panel = new Panel(solver, parsedDurationMillis);
 
-        final Frame frame = new Frame(panel);
+        final Frame frame = new Frame(parsedHeight, panel);
         frame.setVisible(true);
     }
 

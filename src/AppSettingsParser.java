@@ -4,12 +4,23 @@ import java.nio.file.Path;
 
 public class AppSettingsParser {
 
+    private static final String HEIGHT_TAG_NAME = "height";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
 
     private final String settingsXml;
 
     public AppSettingsParser() throws IOException {
         settingsXml = new String(Files.readAllBytes(Path.of("settings.xml")));
+    }
+
+    public Integer height() {
+        Integer height;
+        try {
+            height = Integer.parseInt(value(HEIGHT_TAG_NAME));
+        } catch (NumberFormatException e) {
+            height = null;
+        }
+        return height;
     }
 
     public Integer durationMillis() {
