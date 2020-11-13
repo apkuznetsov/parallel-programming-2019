@@ -7,6 +7,7 @@ public class AppSettingsParser {
     private static final String WIDTH_TAG_NAME = "width";
     private static final String HEIGHT_TAG_NAME = "height";
     private static final String BODIES_NUM_TAG_NAME = "bodiesNum";
+    private static final String DELTA_TIME_TAG_NAME = "deltaTime";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
 
     private final String settingsXml;
@@ -43,6 +44,16 @@ public class AppSettingsParser {
             bodiesNum = null;
         }
         return bodiesNum;
+    }
+
+    public Integer deltaTime() {
+        Integer deltaTime;
+        try {
+            deltaTime = Integer.parseInt(value(DELTA_TIME_TAG_NAME));
+        } catch (NumberFormatException e) {
+            deltaTime = null;
+        }
+        return deltaTime;
     }
 
     public Integer durationMillis() {
