@@ -14,11 +14,13 @@ public class Panel extends JPanel implements ActionListener {
 
     private final NbodySolver solver;
     private final Timer timer;
+    private int consumedMillis;
 
     public Panel(NbodySolver solver) {
         this.solver = solver;
         timer = new Timer(solver.dt(), this);
         timer.start();
+        consumedMillis = 0;
     }
 
     public Timer timer() {
@@ -45,6 +47,12 @@ public class Panel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        if (consumedMillis >= 10_000) {
+            timer.stop();
+            return;
+        }
+
+        consumedMillis += timer.getDelay();
         repaint();
     }
 }
