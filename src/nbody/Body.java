@@ -23,6 +23,17 @@ public class Body {
         f = new Coords(0.0, 0.0);
     }
 
+    public Body(Coords xyCoords, double mass, Coords v) {
+        if (mass < MIN_BODY_MASS || mass > MAX_BODY_MASS) {
+            throw new BodyMassOutOfBoundsException();
+        }
+
+        m = mass;
+        p = xyCoords.clone();
+        this.v = v.clone();
+        f = new Coords(0.0, 0.0);
+    }
+
     public Coords p() {
         return p;
     }

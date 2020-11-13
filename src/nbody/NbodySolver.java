@@ -28,6 +28,21 @@ public class NbodySolver {
         dt = deltaTime;
     }
 
+    public NbodySolver(Body[] b, int deltaTime) {
+
+        if (b.length < MIN_BODIES_NUM || b.length > MAX_BODIES_NUM) {
+            throw new BodiesNumOutOfBoundsException();
+        }
+
+        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
+            throw new DeltaTimeOutOfBoundsException();
+        }
+
+        this.b = b.clone();
+
+        dt = deltaTime;
+    }
+
     public int n() {
         return b.length;
     }
