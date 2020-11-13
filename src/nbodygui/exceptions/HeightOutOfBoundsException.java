@@ -1,4 +1,4 @@
 package nbodygui.exceptions;
 
-public class HeightOutOfBoundsException extends IndexOutOfBoundsException{
+public class HeightOutOfBoundsException extends IndexOutOfBoundsException {
 }
