@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 public class AppSettingsParser {
 
+    private static final String WIDTH_TAG_NAME = "width";
     private static final String HEIGHT_TAG_NAME = "height";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
 
@@ -11,6 +12,16 @@ public class AppSettingsParser {
 
     public AppSettingsParser() throws IOException {
         settingsXml = new String(Files.readAllBytes(Path.of("settings.xml")));
+    }
+
+    public Integer width() {
+        Integer width;
+        try {
+            width = Integer.parseInt(value(WIDTH_TAG_NAME));
+        } catch (NumberFormatException e) {
+            width = null;
+        }
+        return width;
     }
 
     public Integer height() {

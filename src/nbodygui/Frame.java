@@ -11,7 +11,7 @@ import static nbodygui.Frames.*;
 
 public class Frame extends JFrame {
 
-    public Frame(int height, Panel panel) {
+    public Frame(int width, int height, Panel panel) {
         super(DEFAULT_TITLE);
 
         if (height < MIN_HEIGHT || height > MAX_HEIGHT) {
@@ -27,7 +27,7 @@ public class Frame extends JFrame {
             }
         });
 
-        setSize(Frames.DEFAULT_WIDTH, height);
+        setSize(width, height);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
