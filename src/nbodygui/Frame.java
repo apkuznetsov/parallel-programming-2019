@@ -1,15 +1,22 @@
 package nbodygui;
 
+import nbodygui.exceptions.HeightOutOfBoundsException;
 import nbodygui.panel.Panel;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static nbodygui.Frames.*;
+
 public class Frame extends JFrame {
 
     public Frame(int height, Panel panel) {
-        super(Frames.DEFAULT_TITLE);
+        super(DEFAULT_TITLE);
+
+        if (height < MIN_HEIGHT || height > MAX_HEIGHT) {
+            throw new HeightOutOfBoundsException();
+        }
 
         add(panel);
         addWindowListener(new WindowAdapter() {
