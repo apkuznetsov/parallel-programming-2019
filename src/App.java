@@ -6,11 +6,16 @@ import nbodygui.Frames;
 import nbodygui.Panels;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.Random;
+
 
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        final AppSettingsParser settingsParser = new AppSettingsParser();
+
         final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
         final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
