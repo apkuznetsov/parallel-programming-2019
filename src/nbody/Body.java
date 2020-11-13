@@ -1,5 +1,10 @@
 package nbody;
 
+import nbody.exceptions.BodyMassOutOfBoundsException;
+
+import static nbody.Bodies.MAX_BODY_MASS;
+import static nbody.Bodies.MIN_BODY_MASS;
+
 public class Body {
 
     private final double m;
@@ -8,6 +13,10 @@ public class Body {
     private final Coords f;
 
     public Body(Coords xyCoords, double mass) {
+        if (mass < MIN_BODY_MASS || mass > MAX_BODY_MASS) {
+            throw new BodyMassOutOfBoundsException();
+        }
+
         m = mass;
         p = xyCoords.clone();
         v = new Coords(0.0, 0.0);
