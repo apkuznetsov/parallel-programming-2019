@@ -4,11 +4,13 @@ import static nbody.Bodies.G;
 
 public class NbodySolvers {
 
-    public static final int MIN_BODIES_NUM = 4;
-    public static final int MAX_BODIES_NUM = 16;
+    public static final int MIN_BODIES_NUM = 1;
+    public static final int MAX_BODIES_NUM = 1024;
+    public static final int DEFAULT_BODIES_NUM = 4;
 
     public static final int MIN_DELTA_TIME = 16;
     public static final int MAX_DELTA_TIME = 128;
+    public static final int DEFAULT_DELTA_TIME = MIN_DELTA_TIME;
 
     private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
