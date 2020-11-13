@@ -3,6 +3,7 @@ import nbody.NbodySolver;
 import nbody.NbodySolvers;
 import nbodygui.Frame;
 import nbodygui.Frames;
+import nbodygui.Panels;
 
 import java.awt.*;
 import java.util.Random;
@@ -14,7 +15,7 @@ public class App {
         final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
         final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
 
-        final nbodygui.Panel panel = new nbodygui.Panel(solver);
+        final nbodygui.Panel panel = new nbodygui.Panel(solver, Panels.MIN_DURATION_MILLIS);
         final Frame frame = new Frame(panel);
         frame.setVisible(true);
     }
