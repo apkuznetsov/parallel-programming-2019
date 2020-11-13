@@ -6,4 +6,5 @@
     <bodyMass>1e10</bodyMass>
     <deltaTime>20</deltaTime>
     <durationSeconds>21</durationSeconds>
+    <errorDistance>1e2</errorDistance>
 </settings>
