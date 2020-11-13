@@ -17,7 +17,8 @@ public class Panel extends JPanel implements ActionListener {
     private final int durationMillis;
     private int consumedMillis;
 
-    public Panel(NbodySolver solver, int durationMillis) {
+    public Panel(NbodySolver solver, PanelSettings settings) {
+        durationMillis = settings.durationMillis == null ? DEFAULT_DURATION_MILLIS : settings.durationMillis;
         if (durationMillis < MIN_DURATION_MILLIS || durationMillis > MAX_DURATION_MILLIS) {
             throw new DurationMillisOutOfBoundsException();
         }
@@ -26,7 +27,6 @@ public class Panel extends JPanel implements ActionListener {
         timer = new Timer(solver.dt(), this);
         timer.start();
 
-        this.durationMillis = durationMillis;
         consumedMillis = 0;
     }
 

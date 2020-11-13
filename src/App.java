@@ -3,6 +3,7 @@ import nbody.NbodySolver;
 import nbody.NbodySolvers;
 import nbodygui.Frame;
 import nbodygui.Frames;
+import nbodygui.PanelSettings;
 import nbodygui.Panels;
 
 import java.awt.*;
@@ -15,13 +16,16 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         final AppSettingsParser parser = new AppSettingsParser();
-        Integer durationMillis = parser.durationMillis();
 
         final Dimension coordsBounds = new Dimension(Frames.DEFAULT_WIDTH - 100, Frames.DEFAULT_HEIGHT - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(NbodySolvers.MIN_BODIES_NUM, coordsBounds);
         final NbodySolver solver = new NbodySolver(randomCoordsArr, NbodySolvers.MIN_DELTA_TIME);
 
-        final nbodygui.Panel panel = new nbodygui.Panel(solver, Panels.MIN_DURATION_MILLIS);
+        final PanelSettings panelSettings = new PanelSettings(
+                parser.durationMillis()
+        );
+        final nbodygui.Panel panel = new nbodygui.Panel(solver, panelSettings);
+
         final Frame frame = new Frame(panel);
         frame.setVisible(true);
     }
