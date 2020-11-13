@@ -6,6 +6,7 @@ public class AppSettingsParser {
 
     private static final String WIDTH_TAG_NAME = "width";
     private static final String HEIGHT_TAG_NAME = "height";
+    private static final String BODIES_NUM_TAG_NAME = "bodiesNum";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
 
     private final String settingsXml;
@@ -32,6 +33,16 @@ public class AppSettingsParser {
             height = null;
         }
         return height;
+    }
+
+    public Integer bodiesNum() {
+        Integer bodiesNum;
+        try {
+            bodiesNum = Integer.parseInt(value(BODIES_NUM_TAG_NAME));
+        } catch (NumberFormatException e) {
+            bodiesNum = null;
+        }
+        return bodiesNum;
     }
 
     public Integer durationMillis() {
