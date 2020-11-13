@@ -2,6 +2,7 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 import nbody.exceptions.DeltaTimeOutOfBoundsException;
+import nbody.exceptions.ErrorDistanceOutOfBoundsException;
 
 import static nbody.NbodySolvers.*;
 
@@ -21,6 +22,10 @@ public class NbodySolver {
             throw new DeltaTimeOutOfBoundsException();
         }
 
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+            throw new ErrorDistanceOutOfBoundsException();
+        }
+
         b = new Body[bodiesCoords.length];
         for (int i = 0; i < b.length; i++) {
             b[i] = new Body(bodiesCoords[i], bodyMass);
@@ -38,6 +43,10 @@ public class NbodySolver {
 
         if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
             throw new DeltaTimeOutOfBoundsException();
+        }
+        
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+            throw new ErrorDistanceOutOfBoundsException();
         }
 
         this.b = b.clone();
