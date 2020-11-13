@@ -1,4 +1,4 @@
-package nbodygui;
+package nbodygui.panel;
 
 import nbody.NbodySolver;
 import nbodygui.exceptions.DurationMillisOutOfBoundsException;
@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static nbodygui.Panels.*;
+import static nbodygui.panel.Panels.*;
 
 public class Panel extends JPanel implements ActionListener {
 

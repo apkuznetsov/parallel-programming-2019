@@ -1,5 +1,7 @@
 package nbodygui;
 
+import nbodygui.panel.Panel;
+
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

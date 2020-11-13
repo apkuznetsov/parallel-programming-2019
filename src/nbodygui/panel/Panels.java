@@ -1,4 +1,4 @@
-package nbodygui;
+package nbodygui.panel;
 
 import java.awt.*;
 
