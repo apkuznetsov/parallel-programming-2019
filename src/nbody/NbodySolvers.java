@@ -12,6 +12,10 @@ public class NbodySolvers {
     public static final int MAX_DELTA_TIME = 128;
     public static final int DEFAULT_DELTA_TIME = MIN_DELTA_TIME;
 
+    public static final double MIN_ERROR_DISTANCE = 1e2;
+    public static final double MAX_ERROR_DISTANCE = 1e3;
+    public static final double DEFAULT_ERROR_DISTANCE = MIN_ERROR_DISTANCE;
+
     private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDp = new Coords(0.0, 0.0);
