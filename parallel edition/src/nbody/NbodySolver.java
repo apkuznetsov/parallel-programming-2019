@@ -13,6 +13,7 @@ public class NbodySolver {
     private final int dt;
     private final double errorDistance;
     private final int threadsNum;
+    private final int[][] ranges;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -28,6 +29,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
         this.threadsNum = settings.threadsNum;
+
+        ranges = Helpers.ranges(b.length, threadsNum);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -41,6 +44,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
         this.threadsNum = settings.threadsNum;
+
+        ranges = Helpers.ranges(b.length, threadsNum);
     }
 
     public int n() {
@@ -63,7 +68,6 @@ public class NbodySolver {
         recalcBodiesForces();
 
         // MOVE N BODIES
-        int[][] ranges = Helpers.ranges(b.length, threadsNum);
         List<Thread> threads = new ArrayList<>(threadsNum);
         Thread currThread;
         for (int[] range : ranges) {
