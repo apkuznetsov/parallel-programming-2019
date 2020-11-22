@@ -42,4 +42,29 @@ public class NbodySettings {
         this.errorDistance = errorDistance;
         this.threadsNum = threadsNum;
     }
+
+    public NbodySettings(
+            int deltaTime,
+            double errorDistance,
+            int threadsNum
+    ) {
+
+        bodyMass = Bodies.DEFAULT_BODY_MASS;
+
+        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
+            throw new DeltaTimeOutOfBoundsException();
+        }
+
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
+            throw new ErrorDistanceOutOfBoundsException();
+        }
+
+        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
+            throw new ThreadsNumOutOfBoundsException();
+        }
+        
+        this.deltaTime = deltaTime;
+        this.errorDistance = errorDistance;
+        this.threadsNum = threadsNum;
+    }
 }
