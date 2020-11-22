@@ -1,5 +1,6 @@
 import nbody.Body;
 import nbody.Coords;
+import nbody.NbodySettings;
 import nbody.NbodySolver;
 import nbodygui.Frame;
 import nbodygui.Panel;
@@ -17,7 +18,8 @@ public class App {
 
         final Dimension coordsBounds = new Dimension(settings.width - 100, settings.height - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(settings.bodiesNum, coordsBounds);
-        final NbodySolver solver = new NbodySolver(randomCoordsArr, settings.bodyMass, settings.deltaTime, settings.errorDistance, settings.threadsNum);
+        final NbodySettings nbodySettings = new NbodySettings(settings.bodyMass, settings.deltaTime, settings.errorDistance, settings.threadsNum);
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, nbodySettings);
 
         final Panel panel = new Panel(solver, settings.durationMillis);
 
