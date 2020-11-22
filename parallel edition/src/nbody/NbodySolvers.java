@@ -16,10 +16,6 @@ public class NbodySolvers {
     public static final double MAX_ERROR_DISTANCE = 1e3;
     public static final double DEFAULT_ERROR_DISTANCE = MIN_ERROR_DISTANCE;
 
-    private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
-    private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
-    private static final Coords optdMemAllocDp = new Coords(0.0, 0.0);
-
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
                 Math.pow(b1.p().x() - b2.p().x(), 2) + Math.pow(b1.p().y() - b2.p().y(), 2)
@@ -31,27 +27,19 @@ public class NbodySolvers {
     }
 
     public static Coords direction(Body b1, Body b2) {
-        optdMemAllocDirection.set(
+        return new Coords(
                 b2.p().x() - b1.p().x(),
                 b2.p().y() - b1.p().y());
-
-        return optdMemAllocDirection;
     }
 
     public static Coords dv(Body b, long dt) {
-        optdMemAllocDv.set(
+        return new Coords(
                 b.f().x() / b.m() * dt,
                 b.f().y() / b.m() * dt);
-
-        return optdMemAllocDv;
     }
 
     public static Coords dp(Body b, long dt, Coords dv) {
-        optdMemAllocDp.set(
-                (b.v().x() + dv.x() / 2) * dt,
-                (b.v().y() + dv.y() / 2) * dt
-        );
-
-        return optdMemAllocDp;
+        return new Coords((b.v().x() + dv.x() / 2) * dt,
+                (b.v().y() + dv.y() / 2) * dt);
     }
 }
