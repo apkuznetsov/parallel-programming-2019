@@ -9,8 +9,9 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
-    private final int[][] ranges;
     private final Thread[] threads;
+    private final int[][] recalcingForcesRanges;
+    private final int[][] bodiesMovingRanges;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -27,7 +28,8 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         threads = new Thread[settings.threadsNum];
-        ranges = Helpers.ranges(b.length, threads.length);
+        recalcingForcesRanges = Helpers.ranges(0, b.length - 2, threads.length);
+        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -42,7 +44,8 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         threads = new Thread[settings.threadsNum];
-        ranges = Helpers.ranges(b.length, threads.length);
+        recalcingForcesRanges = Helpers.ranges(0, b.length - 2, threads.length);
+        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public int n() {
@@ -67,35 +70,9 @@ public class NbodySolver {
     }
 
     private void recalcBodiesForces() {
-        double distance;
-        double magnitude;
-        Coords direction;
-
-        final int n = b.length;
-        for (int k = 0; k < n - 1; k++) {
-            for (int l = k + 1; l < n; l++) {
-                distance = distance(b[k], b[l]);
-                magnitude = (distance < errorDistance) ? 0.0 : magnitude(b[k], b[l], distance);
-                direction = direction(b[k], b[l]);
-
-                b[k].setF(
-                        b[k].f().x() + magnitude * direction.x() / distance,
-                        b[k].f().y() + magnitude * direction.y() / distance
-                );
-
-                b[l].setF(
-                        b[l].f().x() - magnitude * direction.x() / distance,
-                        b[l].f().y() - magnitude * direction.y() / distance
-                );
-            }
-        }
-    }
-
-    private void moveNBodies() {
-        // MOVE N BODIES
         Thread currThread;
-        for (int i = 0; i < ranges.length; i++) {
-            currThread = new MoveNBodiesThread(ranges[i][0], ranges[i][1]);
+        for (int i = 0; i < recalcingForcesRanges.length; i++) {
+            currThread = new RecalcBodiesForcesThread(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
             currThread.start();
             threads[i] = currThread;
         }
@@ -105,6 +82,61 @@ public class NbodySolver {
                 thread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void moveNBodies() {
+        Thread currThread;
+        for (int i = 0; i < bodiesMovingRanges.length; i++) {
+            currThread = new MoveNBodiesThread(bodiesMovingRanges[i][0], bodiesMovingRanges[i][1]);
+            currThread.start();
+            threads[i] = currThread;
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class RecalcBodiesForcesThread extends Thread {
+
+        private final int leftIndex;
+        private final int rightIndex;
+
+        public RecalcBodiesForcesThread(int leftIndex, int rightIndex) {
+            this.leftIndex = leftIndex;
+            this.rightIndex = rightIndex;
+        }
+
+        @Override
+        public void run() {
+            double distance;
+            double magnitude;
+            Coords direction;
+
+            for (int k = leftIndex; k <= rightIndex; k++) {
+                for (int l = k + 1; l < b.length; l++) {
+                    distance = distance(b[k], b[l]);
+                    magnitude = (distance < errorDistance) ? 0.0 : magnitude(b[k], b[l], distance);
+                    direction = direction(b[k], b[l]);
+
+                    b[k].setF(
+                            b[k].f().x() + magnitude * direction.x() / distance,
+                            b[k].f().y() + magnitude * direction.y() / distance
+                    );
+
+                    synchronized (NbodySolver.class) {
+                        b[l].setF(
+                                b[l].f().x() - magnitude * direction.x() / distance,
+                                b[l].f().y() - magnitude * direction.y() / distance
+                        );
+                    }
+                }
             }
         }
     }
