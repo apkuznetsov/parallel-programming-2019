@@ -134,4 +134,39 @@ public class NbodySolver {
             body.setF(0.0, 0.0);
         }
     }
+
+    private class MoveNBodiesThread extends Thread {
+
+        private final int leftBound;
+        private final int rightBound;
+
+        public MoveNBodiesThread(int leftBound, int rightBound) {
+            this.leftBound = leftBound;
+            this.rightBound = rightBound;
+        }
+
+        @Override
+        public void run() {
+
+            Coords dv; // dv = f/m * dt
+            Coords dp; // dp = (v + dv/2) * dt
+
+            for (int i = leftBound; i <= rightBound; i += 2) {
+                dv = dv(b[i], dt);
+                dp = dp(b[i], dt, dv);
+
+                b[i].setV(
+                        b[i].v().x() + dv.x(),
+                        b[i].v().y() + dv.y()
+                );
+
+                b[i].setP(
+                        b[i].p().x() + dp.x(),
+                        b[i].p().y() + dp.y()
+                );
+
+                b[i].setF(0.0, 0.0);
+            }
+        }
+    }
 }
