@@ -3,6 +3,7 @@ package nbody;
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 import nbody.exceptions.DeltaTimeOutOfBoundsException;
 import nbody.exceptions.ErrorDistanceOutOfBoundsException;
+import nbody.exceptions.ThreadsNumOutOfBoundsException;
 
 import static nbody.NbodySolvers.*;
 
@@ -11,8 +12,9 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
+    private final int threadsNum;
 
-    public NbodySolver(Coords[] bodiesCoords, double bodyMass, int deltaTime, double errorDistance) {
+    public NbodySolver(Coords[] bodiesCoords, double bodyMass, int deltaTime, double errorDistance, int threadsNum) {
 
         if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
@@ -22,8 +24,12 @@ public class NbodySolver {
             throw new DeltaTimeOutOfBoundsException();
         }
 
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
+        }
+
+        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
+            throw new ThreadsNumOutOfBoundsException();
         }
 
         b = new Body[bodiesCoords.length];
@@ -33,9 +39,10 @@ public class NbodySolver {
 
         dt = deltaTime;
         this.errorDistance = errorDistance;
+        this.threadsNum = threadsNum;
     }
 
-    public NbodySolver(Body[] b, int deltaTime, double errorDistance) {
+    public NbodySolver(Body[] b, int deltaTime, double errorDistance, int threadsNum) {
 
         if (b.length < MIN_BODIES_NUM || b.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
@@ -44,15 +51,20 @@ public class NbodySolver {
         if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
             throw new DeltaTimeOutOfBoundsException();
         }
-        
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
+        }
+        
+        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
+            throw new ThreadsNumOutOfBoundsException();
         }
 
         this.b = b.clone();
 
         dt = deltaTime;
         this.errorDistance = errorDistance;
+        this.threadsNum = threadsNum;
     }
 
     public int n() {
