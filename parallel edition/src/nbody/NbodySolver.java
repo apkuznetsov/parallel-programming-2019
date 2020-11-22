@@ -65,36 +65,11 @@ public class NbodySolver {
     }
 
     public void recalcBodiesCoords() {
-        recalcBodiesForces2();
+        recalcBodiesForces();
         moveNBodies();
     }
 
     private void recalcBodiesForces() {
-        double distance;
-        double magnitude;
-        Coords direction;
-
-        final int n = b.length;
-        for (int k = 0; k < n - 1; k++) {
-            for (int l = k + 1; l < n; l++) {
-                distance = distance(b[k], b[l]);
-                magnitude = (distance < errorDistance) ? 0.0 : magnitude(b[k], b[l], distance);
-                direction = direction(b[k], b[l]);
-
-                b[k].setF(
-                        b[k].f().x() + magnitude * direction.x() / distance,
-                        b[k].f().y() + magnitude * direction.y() / distance
-                );
-
-                b[l].setF(
-                        b[l].f().x() - magnitude * direction.x() / distance,
-                        b[l].f().y() - magnitude * direction.y() / distance
-                );
-            }
-        }
-    }
-
-    private void recalcBodiesForces2() {
         Thread currThread;
         for (int i = 0; i < recalcingForcesRanges.length; i++) {
             currThread = new RecalcBodiesForcesThread(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
