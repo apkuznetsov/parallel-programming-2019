@@ -20,10 +20,11 @@ public class App {
         final int parsedDeltaTime = (parser.deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : parser.deltaTime();
         final double parsedErrorDistance = (parser.errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : parser.errorDistance() ;
         final int parsedDurationMillis = (parser.durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : parser.durationMillis();
+        final int threadsNum = (parser.threadsNum() == null) ? NbodySolvers.DEFAULT_THREADS_NUM : parser.threadsNum();
 
         final Dimension coordsBounds = new Dimension(parsedWidth - 100, parsedHeight - 100);
         final Coords[] randomCoordsArr = randomCoordsArr(parsedBodiesNum, coordsBounds);
-        final NbodySolver solver = new NbodySolver(randomCoordsArr, parsedBodyMass, parsedDeltaTime, parsedErrorDistance);
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, parsedBodyMass, parsedDeltaTime, parsedErrorDistance, threadsNum);
 
         final Panel panel = new Panel(solver, parsedDurationMillis);
 
