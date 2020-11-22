@@ -2,9 +2,6 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static nbody.NbodySolvers.*;
 
 public class NbodySolver {
@@ -13,7 +10,7 @@ public class NbodySolver {
     private final int dt;
     private final double errorDistance;
     private final int[][] ranges;
-    private final List<Thread> threads;
+    private final Thread[] threads;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -30,7 +27,7 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         ranges = Helpers.ranges(b.length, settings.threadsNum);
-        threads = new ArrayList<>(settings.threadsNum);
+        threads = new Thread[settings.threadsNum];
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -45,7 +42,7 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         ranges = Helpers.ranges(b.length, settings.threadsNum);
-        threads = new ArrayList<>(settings.threadsNum);
+        threads = new Thread[settings.threadsNum];
     }
 
     public int n() {
@@ -68,12 +65,11 @@ public class NbodySolver {
         recalcBodiesForces();
 
         // MOVE N BODIES
-        threads.clear();
         Thread currThread;
-        for (int[] range : ranges) {
-            currThread = new MoveNBodiesThread(range[0], range[1]);
+        for (int i = 0; i < ranges.length; i++) {
+            currThread = new MoveNBodiesThread(ranges[i][0], ranges[i][1]);
             currThread.start();
-            threads.add(currThread);
+            threads[i] = currThread;
         }
 
         for (Thread thread : threads) {
