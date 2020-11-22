@@ -26,8 +26,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        ranges = Helpers.ranges(b.length, settings.threadsNum);
         threads = new Thread[settings.threadsNum];
+        ranges = Helpers.ranges(b.length, threads.length);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -41,8 +41,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        ranges = Helpers.ranges(b.length, settings.threadsNum);
         threads = new Thread[settings.threadsNum];
+        ranges = Helpers.ranges(b.length, threads.length);
     }
 
     public int n() {
@@ -63,22 +63,7 @@ public class NbodySolver {
 
     public void recalcBodiesCoords() {
         recalcBodiesForces();
-
-        // MOVE N BODIES
-        Thread currThread;
-        for (int i = 0; i < ranges.length; i++) {
-            currThread = new MoveNBodiesThread(ranges[i][0], ranges[i][1]);
-            currThread.start();
-            threads[i] = currThread;
-        }
-
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        moveNBodies();
     }
 
     private void recalcBodiesForces() {
@@ -102,6 +87,24 @@ public class NbodySolver {
                         b[l].f().x() - magnitude * direction.x() / distance,
                         b[l].f().y() - magnitude * direction.y() / distance
                 );
+            }
+        }
+    }
+
+    private void moveNBodies() {
+        // MOVE N BODIES
+        Thread currThread;
+        for (int i = 0; i < ranges.length; i++) {
+            currThread = new MoveNBodiesThread(ranges[i][0], ranges[i][1]);
+            currThread.start();
+            threads[i] = currThread;
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
