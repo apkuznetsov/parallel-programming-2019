@@ -4,7 +4,7 @@ public class Helpers {
 
     public static int[][] ranges(int lastNumber, int threadsNum) {
 
-        float lowLimit = 2.0f;
+        float lowLimit = 1.0f;
         float partition = (lastNumber - lowLimit) / threadsNum;   // n is the number partitions of the range [a,b]
         if (partition < 1.0) {
             throw new IllegalArgumentException();
