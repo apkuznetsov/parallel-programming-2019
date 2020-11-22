@@ -5,6 +5,9 @@ import nbody.exceptions.DeltaTimeOutOfBoundsException;
 import nbody.exceptions.ErrorDistanceOutOfBoundsException;
 import nbody.exceptions.ThreadsNumOutOfBoundsException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static nbody.NbodySolvers.*;
 
 public class NbodySolver {
@@ -55,7 +58,7 @@ public class NbodySolver {
         if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
         }
-        
+
         if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
             throw new ThreadsNumOutOfBoundsException();
         }
@@ -85,7 +88,24 @@ public class NbodySolver {
 
     public void recalcBodiesCoords() {
         recalcBodiesForces();
-        moveNBodies();
+
+        // MOVE N BODIES
+        int[][] ranges = Helpers.ranges(b.length, threadsNum);
+        List<Thread> threads = new ArrayList<>(threadsNum);
+        Thread currThread;
+        for (int[] range : ranges) {
+            currThread = new MoveNBodiesThread(range[0], range[1]);
+            currThread.start();
+            threads.add(currThread);
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void recalcBodiesForces() {
