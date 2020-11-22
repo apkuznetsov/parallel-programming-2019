@@ -118,7 +118,7 @@ public class AppSettingsParser {
         return leftAndRight[0];
     }
 
-    private AppSettings parseSettings() {
+    public AppSettings parseSettings() {
         final int parsedWidth = (width() == null) ? Frames.DEFAULT_WIDTH : width();
         final int parsedHeight = (height() == null) ? Frames.DEFAULT_HEIGHT : height();
         final int parsedBodiesNum = (bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : bodiesNum();

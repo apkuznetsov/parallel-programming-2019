@@ -1,8 +1,8 @@
-import nbody.*;
+import nbody.Body;
+import nbody.Coords;
+import nbody.NbodySolver;
 import nbodygui.Frame;
-import nbodygui.Frames;
 import nbodygui.Panel;
-import nbodygui.Panels;
 
 import java.awt.*;
 import java.io.IOException;
@@ -13,22 +13,15 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         final AppSettingsParser parser = new AppSettingsParser();
-        final int parsedWidth = (parser.width() == null) ? Frames.DEFAULT_WIDTH : parser.width();
-        final int parsedHeight = (parser.height() == null) ? Frames.DEFAULT_HEIGHT : parser.height();
-        final int parsedBodiesNum = (parser.bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : parser.bodiesNum();
-        final double parsedBodyMass = (parser.bodyMass() == null) ? Bodies.DEFAULT_BODY_MASS : parser.bodyMass();
-        final int parsedDeltaTime = (parser.deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : parser.deltaTime();
-        final double parsedErrorDistance = (parser.errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : parser.errorDistance() ;
-        final int parsedDurationMillis = (parser.durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : parser.durationMillis();
-        final int threadsNum = (parser.threadsNum() == null) ? NbodySolvers.DEFAULT_THREADS_NUM : parser.threadsNum();
+        final AppSettings settings = parser.parseSettings();
 
-        final Dimension coordsBounds = new Dimension(parsedWidth - 100, parsedHeight - 100);
-        final Coords[] randomCoordsArr = randomCoordsArr(parsedBodiesNum, coordsBounds);
-        final NbodySolver solver = new NbodySolver(randomCoordsArr, parsedBodyMass, parsedDeltaTime, parsedErrorDistance, threadsNum);
+        final Dimension coordsBounds = new Dimension(settings.width - 100, settings.height - 100);
+        final Coords[] randomCoordsArr = randomCoordsArr(settings.bodiesNum, coordsBounds);
+        final NbodySolver solver = new NbodySolver(randomCoordsArr, settings.bodyMass, settings.deltaTime, settings.errorDistance, settings.threadsNum);
 
-        final Panel panel = new Panel(solver, parsedDurationMillis);
+        final Panel panel = new Panel(solver, settings.durationMillis);
 
-        final Frame frame = new Frame(parsedWidth, parsedHeight, panel);
+        final Frame frame = new Frame(settings.width, settings.height, panel);
         frame.setVisible(true);
 
         //final NbodySolver solver = new NbodySolver(pseudoEarthAndMoon(250, 200), NbodySolvers.DEFAULT_DELTA_TIME);
