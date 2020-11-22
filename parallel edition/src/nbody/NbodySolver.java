@@ -1,9 +1,6 @@
 package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
-import nbody.exceptions.DeltaTimeOutOfBoundsException;
-import nbody.exceptions.ErrorDistanceOutOfBoundsException;
-import nbody.exceptions.ThreadsNumOutOfBoundsException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,29 +30,17 @@ public class NbodySolver {
         this.threadsNum = settings.threadsNum;
     }
 
-    public NbodySolver(Body[] b, int deltaTime, double errorDistance, int threadsNum) {
+    public NbodySolver(Body[] b, NbodySettings settings) {
 
         if (b.length < MIN_BODIES_NUM || b.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
         }
 
-        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
-            throw new DeltaTimeOutOfBoundsException();
-        }
-
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
-            throw new ErrorDistanceOutOfBoundsException();
-        }
-
-        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
-            throw new ThreadsNumOutOfBoundsException();
-        }
-
         this.b = b.clone();
 
-        dt = deltaTime;
-        this.errorDistance = errorDistance;
-        this.threadsNum = threadsNum;
+        dt = settings.deltaTime;
+        this.errorDistance = settings.errorDistance;
+        this.threadsNum = settings.threadsNum;
     }
 
     public int n() {
