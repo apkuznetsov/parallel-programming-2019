@@ -2,23 +2,23 @@ package nbody;
 
 public class Helpers {
 
-    public static int[][] ranges(int lastNumber, int threadsNum) {
+    public static int[][] ranges(int endNumber, int rangesNum) {
 
         float lowLimit = 1.0f;
-        float partition = (lastNumber - lowLimit) / threadsNum;   // n is the number partitions of the range [a,b]
+        float partition = (endNumber - lowLimit) / rangesNum;   // n is the number partitions of the range [a,b]
         if (partition < 1.0) {
             throw new IllegalArgumentException();
         }
 
-        int[][] ranges = new int[threadsNum][2];
+        int[][] ranges = new int[rangesNum][2];
 
         ranges[0][0] = Math.round(lowLimit);
-        for (int rowIndex = 0; rowIndex < threadsNum - 1; rowIndex++) {
+        for (int rowIndex = 0; rowIndex < rangesNum - 1; rowIndex++) {
             lowLimit += partition;
             ranges[rowIndex][1] = Math.round(lowLimit);
             ranges[rowIndex + 1][0] = ranges[rowIndex][1] + 1;
         }
-        ranges[threadsNum - 1][1] = lastNumber;
+        ranges[rangesNum - 1][1] = endNumber;
 
         return ranges;
     }
