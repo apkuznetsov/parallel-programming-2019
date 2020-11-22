@@ -27,7 +27,7 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         threads = new Thread[settings.threadsNum];
-        bodiesMovingRanges = Helpers.ranges(b.length, threads.length);
+        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -42,7 +42,7 @@ public class NbodySolver {
         this.errorDistance = settings.errorDistance;
 
         threads = new Thread[settings.threadsNum];
-        bodiesMovingRanges = Helpers.ranges(b.length, threads.length);
+        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public int n() {

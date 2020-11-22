@@ -2,10 +2,10 @@ package nbody;
 
 public class Helpers {
 
-    public static int[][] ranges(int endNumber, int rangesNum) {
+    public static int[][] ranges(int startNum, int endNum, int rangesNum) {
 
-        float lowLimit = 1.0f;
-        float partition = (endNumber - lowLimit) / rangesNum;   // n is the number partitions of the range [a,b]
+        float lowLimit = startNum;
+        float partition = (endNum - lowLimit) / rangesNum;   // n is the number partitions of the range [a,b]
         if (partition < 1.0) {
             throw new IllegalArgumentException();
         }
@@ -18,7 +18,7 @@ public class Helpers {
             ranges[rowIndex][1] = Math.round(lowLimit);
             ranges[rowIndex + 1][0] = ranges[rowIndex][1] + 1;
         }
-        ranges[rangesNum - 1][1] = endNumber;
+        ranges[rangesNum - 1][1] = endNum;
 
         return ranges;
     }
