@@ -12,7 +12,6 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
-    private final int threadsNum;
     private final int[][] ranges;
     private final List<Thread> threads;
 
@@ -29,10 +28,9 @@ public class NbodySolver {
 
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
-        this.threadsNum = settings.threadsNum;
 
-        ranges = Helpers.ranges(b.length, threadsNum);
-        threads = new ArrayList<>(threadsNum);
+        ranges = Helpers.ranges(b.length, settings.threadsNum);
+        threads = new ArrayList<>(settings.threadsNum);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -45,10 +43,9 @@ public class NbodySolver {
 
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
-        this.threadsNum = settings.threadsNum;
 
-        ranges = Helpers.ranges(b.length, threadsNum);
-        threads = new ArrayList<>(threadsNum);
+        ranges = Helpers.ranges(b.length, settings.threadsNum);
+        threads = new ArrayList<>(settings.threadsNum);
     }
 
     public int n() {
