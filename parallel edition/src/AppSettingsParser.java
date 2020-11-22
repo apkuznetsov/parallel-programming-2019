@@ -1,3 +1,8 @@
+import nbody.Bodies;
+import nbody.NbodySolvers;
+import nbodygui.Frames;
+import nbodygui.Panels;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -111,5 +116,27 @@ public class AppSettingsParser {
         }
 
         return leftAndRight[0];
+    }
+
+    private AppSettings parseSettings() {
+        final int parsedWidth = (width() == null) ? Frames.DEFAULT_WIDTH : width();
+        final int parsedHeight = (height() == null) ? Frames.DEFAULT_HEIGHT : height();
+        final int parsedBodiesNum = (bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : bodiesNum();
+        final double parsedBodyMass = (bodyMass() == null) ? Bodies.DEFAULT_BODY_MASS : bodyMass();
+        final int parsedDeltaTime = (deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : deltaTime();
+        final double parsedErrorDistance = (errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : errorDistance();
+        final int parsedDurationMillis = (durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : durationMillis();
+        final int parsedThreadsNum = (threadsNum() == null) ? NbodySolvers.DEFAULT_THREADS_NUM : threadsNum();
+
+        return new AppSettings(
+                parsedWidth,
+                parsedHeight,
+                parsedBodiesNum,
+                parsedBodyMass,
+                parsedDeltaTime,
+                parsedErrorDistance,
+                parsedDurationMillis,
+                parsedThreadsNum
+        );
     }
 }
