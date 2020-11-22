@@ -91,6 +91,23 @@ public class NbodySolver {
         }
     }
 
+    private void recalcBodiesForces2() {
+        Thread currThread;
+        for (int i = 0; i < recalcingForcesRanges.length; i++) {
+            currThread = new RecalcBodiesForcesThread(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
+            currThread.start();
+            threads[i] = currThread;
+        }
+
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void moveNBodies() {
         Thread currThread;
         for (int i = 0; i < bodiesMovingRanges.length; i++) {
