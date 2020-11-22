@@ -16,6 +16,10 @@ public class NbodySolvers {
     public static final double MAX_ERROR_DISTANCE = 1e3;
     public static final double DEFAULT_ERROR_DISTANCE = MIN_ERROR_DISTANCE;
 
+    public static final double MIN_THREADS_NUM = 1;
+    public static final double MAX_THREADS_NUM = 64;
+    public static final double DEFAULT_THREADS_NUM = MIN_THREADS_NUM;
+
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
                 Math.pow(b1.p().x() - b2.p().x(), 2) + Math.pow(b1.p().y() - b2.p().y(), 2)
