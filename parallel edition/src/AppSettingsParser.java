@@ -11,6 +11,7 @@ public class AppSettingsParser {
     private static final String DELTA_TIME_TAG_NAME = "deltaTime";
     private static final String ERROR_DISTANCE_TAG_NAME = "errorDistance";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
+    private static final String THREADS_NUM_TAG_NAME = "threadsNum";
 
     private final String settingsXml;
 
@@ -86,6 +87,16 @@ public class AppSettingsParser {
             durationMillis = null;
         }
         return durationMillis;
+    }
+
+    public Integer threadsNum() {
+        Integer threadsNum;
+        try {
+            threadsNum = Integer.parseInt(value(THREADS_NUM_TAG_NAME));
+        } catch (NumberFormatException e) {
+            threadsNum = null;
+        }
+        return threadsNum;
     }
 
     private String value(String tagName) {
