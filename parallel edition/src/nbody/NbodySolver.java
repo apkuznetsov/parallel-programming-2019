@@ -108,6 +108,44 @@ public class NbodySolver {
         }
     }
 
+    private class RecalcBodiesForcesThread extends Thread {
+
+        private final int leftIndex;
+        private final int rightIndex;
+
+        public RecalcBodiesForcesThread(int leftIndex, int rightIndex) {
+            this.leftIndex = leftIndex;
+            this.rightIndex = rightIndex;
+        }
+
+        @Override
+        public void run() {
+            double distance;
+            double magnitude;
+            Coords direction;
+
+            for (int k = leftIndex; k <= rightIndex; k++) {
+                for (int l = k + 1; l < b.length; l++) {
+                    distance = distance(b[k], b[l]);
+                    magnitude = (distance < errorDistance) ? 0.0 : magnitude(b[k], b[l], distance);
+                    direction = direction(b[k], b[l]);
+
+                    b[k].setF(
+                            b[k].f().x() + magnitude * direction.x() / distance,
+                            b[k].f().y() + magnitude * direction.y() / distance
+                    );
+
+                    synchronized (NbodySolver.class) {
+                        b[l].setF(
+                                b[l].f().x() - magnitude * direction.x() / distance,
+                                b[l].f().y() - magnitude * direction.y() / distance
+                        );
+                    }
+                }
+            }
+        }
+    }
+
     private class MoveNBodiesThread extends Thread {
 
         private final int leftIndex;
