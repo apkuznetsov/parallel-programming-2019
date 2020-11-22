@@ -157,12 +157,12 @@ public class NbodySolver {
 
     private class MoveNBodiesThread extends Thread {
 
-        private final int leftBound;
-        private final int rightBound;
+        private final int leftIndex;
+        private final int rightIndex;
 
-        public MoveNBodiesThread(int leftBound, int rightBound) {
-            this.leftBound = leftBound - 1;
-            this.rightBound = rightBound - 1;
+        public MoveNBodiesThread(int rangeStart, int rangeEnd) {
+            this.leftIndex = rangeStart - 1;
+            this.rightIndex = rangeEnd - 1;
         }
 
         @Override
@@ -171,7 +171,7 @@ public class NbodySolver {
             Coords dv; // dv = f/m * dt
             Coords dp; // dp = (v + dv/2) * dt
 
-            for (int i = leftBound; i <= rightBound; i++) {
+            for (int i = leftIndex; i <= rightIndex; i++) {
                 dv = dv(b[i], dt);
                 dp = dp(b[i], dt, dv);
 
