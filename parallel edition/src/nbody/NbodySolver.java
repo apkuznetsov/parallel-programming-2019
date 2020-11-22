@@ -133,28 +133,6 @@ public class NbodySolver {
         }
     }
 
-    private void moveNBodies() {
-        Coords dv; // dv = f/m * dt
-        Coords dp; // dp = (v + dv/2) * dt
-
-        for (Body body : b) {
-            dv = dv(body, dt);
-            dp = dp(body, dt, dv);
-
-            body.setV(
-                    body.v().x() + dv.x(),
-                    body.v().y() + dv.y()
-            );
-
-            body.setP(
-                    body.p().x() + dp.x(),
-                    body.p().y() + dp.y()
-            );
-
-            body.setF(0.0, 0.0);
-        }
-    }
-
     private class MoveNBodiesThread extends Thread {
 
         private final int leftIndex;
