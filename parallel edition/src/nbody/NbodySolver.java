@@ -130,7 +130,7 @@ public class NbodySolver {
                             b[k].f().y() + magnitude * direction.y() / distance
                     );
 
-                    synchronized (NbodySolver.class) {
+                    synchronized (NbodySolver.this) {
                         b[l].setF(
                                 b[l].f().x() - magnitude * direction.x() / distance,
                                 b[l].f().y() - magnitude * direction.y() / distance
