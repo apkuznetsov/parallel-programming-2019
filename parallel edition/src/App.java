@@ -24,6 +24,8 @@ public class App {
 
         final Frame frame = new Frame(settings.width, settings.height, panel);
         frame.setVisible(true);
+
+        panel.start();
     }
 
     public static Coords[] randomCoordsArr(int num, Dimension coordsBounds) {
