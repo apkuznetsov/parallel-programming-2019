@@ -143,7 +143,7 @@ public class NbodySolver {
         }
     }
 
-    private class MovingCallable extends Thread {
+    private class MovingCallable implements Callable<Void> {
 
         private final int leftIndex;
         private final int rightIndex;
@@ -154,7 +154,7 @@ public class NbodySolver {
         }
 
         @Override
-        public void run() {
+        public Void call() {
 
             Coords dv; // dv = f/m * dt
             Coords dp; // dp = (v + dv/2) * dt
@@ -175,6 +175,8 @@ public class NbodySolver {
 
                 b[i].setF(0.0, 0.0);
             }
+
+            return null;
         }
     }
 }
