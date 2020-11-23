@@ -18,7 +18,6 @@ public class NbodySolver {
     private final ExecutorService executor;
     private final Future[] recalcingFutures;
     private final Future[] movingFutures;
-    private final Thread[] threads;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -34,9 +33,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        threads = new Thread[settings.threadsNum];
-        recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        movingRanges = Helpers.ranges(1, b.length, threads.length);
+        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new Future[settings.threadsNum];
@@ -54,9 +52,8 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        threads = new Thread[settings.threadsNum];
-        recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        movingRanges = Helpers.ranges(1, b.length, threads.length);
+        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new Future[settings.threadsNum];
@@ -113,6 +110,15 @@ public class NbodySolver {
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void stop() {
+        executor.shutdown();
+        try {
+            executor.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

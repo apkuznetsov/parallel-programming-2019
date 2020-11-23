@@ -28,6 +28,7 @@ public class Panel extends JPanel {
             solver.recalcBodiesCoords();
             repaint();
         }
+        solver.stop();
     }
 
     private void drawRandomPoints(Graphics gr) {
