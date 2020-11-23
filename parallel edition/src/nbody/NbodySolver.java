@@ -89,7 +89,7 @@ public class NbodySolver {
     private void moveNBodies() {
         Thread currThread;
         for (int i = 0; i < bodiesMovingRanges.length; i++) {
-            currThread = new MoveNBodiesThread(bodiesMovingRanges[i][0], bodiesMovingRanges[i][1]);
+            currThread = new MovingCallable(bodiesMovingRanges[i][0], bodiesMovingRanges[i][1]);
             currThread.start();
             threads[i] = currThread;
         }
@@ -141,12 +141,12 @@ public class NbodySolver {
         }
     }
 
-    private class MoveNBodiesThread extends Thread {
+    private class MovingCallable extends Thread {
 
         private final int leftIndex;
         private final int rightIndex;
 
-        public MoveNBodiesThread(int rangeStart, int rangeEnd) {
+        public MovingCallable(int rangeStart, int rangeEnd) {
             this.leftIndex = rangeStart - 1;
             this.rightIndex = rangeEnd - 1;
         }
