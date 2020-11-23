@@ -2,9 +2,8 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ArrayList;
+import java.util.concurrent.*;
 
 import static nbody.NbodySolvers.*;
 
@@ -13,10 +12,13 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
-    private final ExecutorService executor;
-    private final Thread[] threads;
+
     private final int[][] recalcingRanges;
     private final int[][] movingRanges;
+
+    private final ExecutorService executor;
+    private final ArrayList<Future<Void>> recalcingFutures;
+    private final Thread[] threads;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -37,6 +39,7 @@ public class NbodySolver {
         movingRanges = Helpers.ranges(1, b.length, threads.length);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
+        recalcingFutures = new ArrayList<>(settings.threadsNum);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -55,6 +58,7 @@ public class NbodySolver {
         movingRanges = Helpers.ranges(1, b.length, threads.length);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
+        recalcingFutures = new ArrayList<>(settings.threadsNum);
     }
 
     public int n() {
@@ -79,17 +83,16 @@ public class NbodySolver {
     }
 
     private void recalcBodiesForces() {
-        Thread currThread;
+        RecalcingCallable recalcing;
         for (int i = 0; i < recalcingRanges.length; i++) {
-            currThread = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
-            currThread.start();
-            threads[i] = currThread;
+            recalcing = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
+            recalcingFutures.set(i, executor.submit(recalcing));
         }
 
-        for (Thread thread : threads) {
+        for (Future<Void> f : recalcingFutures) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                f.get();
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
