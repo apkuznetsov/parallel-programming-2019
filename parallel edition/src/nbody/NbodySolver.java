@@ -2,6 +2,10 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static nbody.NbodySolvers.*;
 
 public class NbodySolver {
@@ -9,6 +13,7 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
+    private final ExecutorService executor;
     private final Thread[] threads;
     private final int[][] recalcingRanges;
     private final int[][] movingRanges;
@@ -30,6 +35,8 @@ public class NbodySolver {
         threads = new Thread[settings.threadsNum];
         recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
         movingRanges = Helpers.ranges(1, b.length, threads.length);
+
+        executor = Executors.newFixedThreadPool(settings.threadsNum);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -46,6 +53,8 @@ public class NbodySolver {
         threads = new Thread[settings.threadsNum];
         recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
         movingRanges = Helpers.ranges(1, b.length, threads.length);
+
+        executor = Executors.newFixedThreadPool(settings.threadsNum);
     }
 
     public int n() {
