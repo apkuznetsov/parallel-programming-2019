@@ -11,7 +11,7 @@ public class NbodySolver {
     private final double errorDistance;
     private final Thread[] threads;
     private final int[][] recalcingRanges;
-    private final int[][] bodiesMovingRanges;
+    private final int[][] movingRanges;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -29,7 +29,7 @@ public class NbodySolver {
 
         threads = new Thread[settings.threadsNum];
         recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
+        movingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -45,7 +45,7 @@ public class NbodySolver {
 
         threads = new Thread[settings.threadsNum];
         recalcingRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
+        movingRanges = Helpers.ranges(1, b.length, threads.length);
     }
 
     public int n() {
@@ -88,8 +88,8 @@ public class NbodySolver {
 
     private void moveNBodies() {
         Thread currThread;
-        for (int i = 0; i < bodiesMovingRanges.length; i++) {
-            currThread = new MovingCallable(bodiesMovingRanges[i][0], bodiesMovingRanges[i][1]);
+        for (int i = 0; i < movingRanges.length; i++) {
+            currThread = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
             currThread.start();
             threads[i] = currThread;
         }
