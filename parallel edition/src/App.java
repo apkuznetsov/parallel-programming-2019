@@ -1,4 +1,3 @@
-import nbody.Body;
 import nbody.Coords;
 import nbody.NbodySettings;
 import nbody.NbodySolver;

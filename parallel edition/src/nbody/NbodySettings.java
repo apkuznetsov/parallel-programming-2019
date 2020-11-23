@@ -62,7 +62,7 @@ public class NbodySettings {
         if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
             throw new ThreadsNumOutOfBoundsException();
         }
-        
+
         this.deltaTime = deltaTime;
         this.errorDistance = errorDistance;
         this.threadsNum = threadsNum;
