@@ -103,7 +103,7 @@ public class NbodySolver {
         }
     }
 
-    private class RecalcingCallable extends Thread {
+    private class RecalcingCallable implements Callable<Void> {
 
         private final int leftIndex;
         private final int rightIndex;
@@ -114,7 +114,7 @@ public class NbodySolver {
         }
 
         @Override
-        public void run() {
+        public Void call() {
             double distance;
             double magnitude;
             Coords direction;
@@ -138,6 +138,8 @@ public class NbodySolver {
                     }
                 }
             }
+
+            return null;
         }
     }
 
