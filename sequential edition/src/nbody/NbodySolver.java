@@ -1,8 +1,6 @@
 package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
-import nbody.exceptions.DeltaTimeOutOfBoundsException;
-import nbody.exceptions.ErrorDistanceOutOfBoundsException;
 
 import static nbody.NbodySolvers.*;
 
@@ -12,47 +10,31 @@ public class NbodySolver {
     private final int dt;
     private final double errorDistance;
 
-    public NbodySolver(Coords[] bodiesCoords, double bodyMass, int deltaTime, double errorDistance) {
+    public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
         if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
         }
 
-        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
-            throw new DeltaTimeOutOfBoundsException();
-        }
-
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
-            throw new ErrorDistanceOutOfBoundsException();
-        }
-
         b = new Body[bodiesCoords.length];
         for (int i = 0; i < b.length; i++) {
-            b[i] = new Body(bodiesCoords[i], bodyMass);
+            b[i] = new Body(bodiesCoords[i], settings.bodyMass);
         }
 
-        dt = deltaTime;
-        this.errorDistance = errorDistance;
+        dt = settings.deltaTime;
+        this.errorDistance = settings.errorDistance;
     }
 
-    public NbodySolver(Body[] b, int deltaTime, double errorDistance) {
+    public NbodySolver(Body[] b, NbodySettings settings) {
 
         if (b.length < MIN_BODIES_NUM || b.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
         }
 
-        if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
-            throw new DeltaTimeOutOfBoundsException();
-        }
-        
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
-            throw new ErrorDistanceOutOfBoundsException();
-        }
-
         this.b = b.clone();
 
-        dt = deltaTime;
-        this.errorDistance = errorDistance;
+        dt = settings.deltaTime;
+        this.errorDistance = settings.errorDistance;
     }
 
     public int n() {
