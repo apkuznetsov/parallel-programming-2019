@@ -25,11 +25,6 @@ public class App {
 
         final Frame frame = new Frame(settings.width, settings.height, panel);
         frame.setVisible(true);
-
-        //final NbodySolver solver = new NbodySolver(pseudoEarthAndMoon(250, 200), NbodySolvers.DEFAULT_DELTA_TIME);
-        //final Panel panel = new Panel(solver, Panels.MAX_DURATION_MILLIS);
-        //final Frame frame = new Frame(Frames.DEFAULT_WIDTH, Frames.DEFAULT_HEIGHT, panel);
-        //frame.setVisible(true);
     }
 
     public static Coords[] randomCoordsArr(int num, Dimension coordsBounds) {
@@ -46,11 +41,5 @@ public class App {
         }
 
         return randomCoordsArr;
-    }
-
-    public static Body[] pseudoEarthAndMoon(double x, double y) {
-        Body earth = new Body(new Coords(x, y), 6e10);
-        Body moon = new Body(new Coords(earth.p().x(), earth.p().y() + 300), 6e4, new Coords(0.02, 0.0));
-        return new Body[]{earth, moon};
     }
 }
