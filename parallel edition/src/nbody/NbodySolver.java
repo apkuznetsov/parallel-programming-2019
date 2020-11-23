@@ -18,6 +18,7 @@ public class NbodySolver {
 
     private final ExecutorService executor;
     private final ArrayList<Future<Void>> recalcingFutures;
+    private final Future[] movingFutures;
     private final Thread[] threads;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
@@ -40,6 +41,7 @@ public class NbodySolver {
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new ArrayList<>(settings.threadsNum);
+        movingFutures = new Future[settings.threadsNum];
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -59,6 +61,7 @@ public class NbodySolver {
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new ArrayList<>(settings.threadsNum);
+        movingFutures = new Future[settings.threadsNum];
     }
 
     public int n() {
@@ -99,17 +102,16 @@ public class NbodySolver {
     }
 
     private void moveNBodies() {
-        Thread currThread;
+        MovingCallable moving;
         for (int i = 0; i < movingRanges.length; i++) {
-            currThread = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
-            currThread.start();
-            threads[i] = currThread;
+            moving = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
+            movingFutures[i] = executor.submit(moving);
         }
 
-        for (Thread thread : threads) {
+        for (Future f : movingFutures) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                f.get();
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
