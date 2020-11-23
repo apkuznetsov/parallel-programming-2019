@@ -72,7 +72,7 @@ public class NbodySolver {
     private void recalcBodiesForces() {
         Thread currThread;
         for (int i = 0; i < recalcingForcesRanges.length; i++) {
-            currThread = new RecalcBodiesForcesThread(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
+            currThread = new RecalcingCallable(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
             currThread.start();
             threads[i] = currThread;
         }
@@ -103,12 +103,12 @@ public class NbodySolver {
         }
     }
 
-    private class RecalcBodiesForcesThread extends Thread {
+    private class RecalcingCallable extends Thread {
 
         private final int leftIndex;
         private final int rightIndex;
 
-        public RecalcBodiesForcesThread(int leftIndex, int rightIndex) {
+        public RecalcingCallable(int leftIndex, int rightIndex) {
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
         }
