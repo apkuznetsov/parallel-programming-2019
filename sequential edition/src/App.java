@@ -24,6 +24,12 @@ public class App {
 
         final Frame frame = new Frame(settings.width, settings.height, panel);
         frame.setVisible(true);
+
+        long startMillis = System.currentTimeMillis();
+        panel.start();
+        long finishMillis = System.currentTimeMillis();
+        long consumedMillis = finishMillis - startMillis;
+        System.out.println("Consumed millis: " + consumedMillis);
     }
 
     public static Coords[] randomCoordsArr(int num, Dimension coordsBounds) {

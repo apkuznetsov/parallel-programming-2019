@@ -4,8 +4,6 @@ import nbodygui.exceptions.HeightOutOfBoundsException;
 import nbodygui.exceptions.WidthOutOfBoundsException;
 
 import javax.swing.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import static nbodygui.Frames.*;
 
@@ -23,13 +21,6 @@ public class Frame extends JFrame {
         }
 
         add(panel);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                Timer timer = panel.timer();
-                timer.stop();
-            }
-        });
 
         setSize(width, height);
         setResizable(false);

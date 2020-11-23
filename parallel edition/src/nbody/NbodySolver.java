@@ -2,6 +2,8 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 
+import java.util.concurrent.*;
+
 import static nbody.NbodySolvers.*;
 
 public class NbodySolver {
@@ -9,9 +11,13 @@ public class NbodySolver {
     private final Body[] b;
     private final int dt;
     private final double errorDistance;
-    private final Thread[] threads;
-    private final int[][] recalcingForcesRanges;
-    private final int[][] bodiesMovingRanges;
+
+    private final int[][] recalcingRanges;
+    private final int[][] movingRanges;
+
+    private final ExecutorService executor;
+    private final Future[] recalcingFutures;
+    private final Future[] movingFutures;
 
     public NbodySolver(Coords[] bodiesCoords, NbodySettings settings) {
 
@@ -27,9 +33,12 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        threads = new Thread[settings.threadsNum];
-        recalcingForcesRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
+        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+
+        executor = Executors.newFixedThreadPool(settings.threadsNum);
+        recalcingFutures = new Future[settings.threadsNum];
+        movingFutures = new Future[settings.threadsNum];
     }
 
     public NbodySolver(Body[] b, NbodySettings settings) {
@@ -43,9 +52,12 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        threads = new Thread[settings.threadsNum];
-        recalcingForcesRanges = Helpers.ranges(0, b.length - 2, threads.length);
-        bodiesMovingRanges = Helpers.ranges(1, b.length, threads.length);
+        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+
+        executor = Executors.newFixedThreadPool(settings.threadsNum);
+        recalcingFutures = new Future[settings.threadsNum];
+        movingFutures = new Future[settings.threadsNum];
     }
 
     public int n() {
@@ -70,51 +82,58 @@ public class NbodySolver {
     }
 
     private void recalcBodiesForces() {
-        Thread currThread;
-        for (int i = 0; i < recalcingForcesRanges.length; i++) {
-            currThread = new RecalcBodiesForcesThread(recalcingForcesRanges[i][0], recalcingForcesRanges[i][1]);
-            currThread.start();
-            threads[i] = currThread;
+        RecalcingCallable recalcing;
+        for (int i = 0; i < recalcingRanges.length; i++) {
+            recalcing = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
+            recalcingFutures[i] = executor.submit(recalcing);
         }
 
-        for (Thread thread : threads) {
+        for (Future f : recalcingFutures) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                f.get();
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
     private void moveNBodies() {
-        Thread currThread;
-        for (int i = 0; i < bodiesMovingRanges.length; i++) {
-            currThread = new MoveNBodiesThread(bodiesMovingRanges[i][0], bodiesMovingRanges[i][1]);
-            currThread.start();
-            threads[i] = currThread;
+        MovingCallable moving;
+        for (int i = 0; i < movingRanges.length; i++) {
+            moving = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
+            movingFutures[i] = executor.submit(moving);
         }
 
-        for (Thread thread : threads) {
+        for (Future f : movingFutures) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                f.get();
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    private class RecalcBodiesForcesThread extends Thread {
+    public void stop() {
+        executor.shutdown();
+        try {
+            executor.awaitTermination(1, TimeUnit.MINUTES);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private class RecalcingCallable implements Callable<Void> {
 
         private final int leftIndex;
         private final int rightIndex;
 
-        public RecalcBodiesForcesThread(int leftIndex, int rightIndex) {
+        public RecalcingCallable(int leftIndex, int rightIndex) {
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
         }
 
         @Override
-        public void run() {
+        public Void call() {
             double distance;
             double magnitude;
             Coords direction;
@@ -130,7 +149,7 @@ public class NbodySolver {
                             b[k].f().y() + magnitude * direction.y() / distance
                     );
 
-                    synchronized (NbodySolver.class) {
+                    synchronized (NbodySolver.this) {
                         b[l].setF(
                                 b[l].f().x() - magnitude * direction.x() / distance,
                                 b[l].f().y() - magnitude * direction.y() / distance
@@ -138,21 +157,23 @@ public class NbodySolver {
                     }
                 }
             }
+
+            return null;
         }
     }
 
-    private class MoveNBodiesThread extends Thread {
+    private class MovingCallable implements Callable<Void> {
 
         private final int leftIndex;
         private final int rightIndex;
 
-        public MoveNBodiesThread(int rangeStart, int rangeEnd) {
+        public MovingCallable(int rangeStart, int rangeEnd) {
             this.leftIndex = rangeStart - 1;
             this.rightIndex = rangeEnd - 1;
         }
 
         @Override
-        public void run() {
+        public Void call() {
 
             Coords dv; // dv = f/m * dt
             Coords dp; // dp = (v + dv/2) * dt
@@ -173,6 +194,8 @@ public class NbodySolver {
 
                 b[i].setF(0.0, 0.0);
             }
+
+            return null;
         }
     }
 }

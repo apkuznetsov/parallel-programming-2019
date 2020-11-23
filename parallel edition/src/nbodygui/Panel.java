@@ -5,17 +5,13 @@ import nbodygui.exceptions.DurationMillisOutOfBoundsException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static nbodygui.Panels.*;
 
-public class Panel extends JPanel implements ActionListener {
+public class Panel extends JPanel {
 
     private final NbodySolver solver;
-    private final Timer timer;
     private final int durationMillis;
-    private int consumedMillis;
 
     public Panel(NbodySolver solver, int durationMillis) {
         if (durationMillis < MIN_DURATION_MILLIS || durationMillis > MAX_DURATION_MILLIS) {
@@ -23,15 +19,16 @@ public class Panel extends JPanel implements ActionListener {
         }
 
         this.solver = solver;
-        timer = new Timer(solver.dt(), this);
-        timer.start();
 
-        consumedMillis = 0;
         this.durationMillis = durationMillis;
     }
 
-    public Timer timer() {
-        return timer;
+    public void start() {
+        for (int t = 0; t <= durationMillis; t = t + solver.dt()) {
+            solver.recalcBodiesCoords();
+            repaint();
+        }
+        solver.stop();
     }
 
     private void drawRandomPoints(Graphics gr) {
@@ -48,18 +45,6 @@ public class Panel extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics gr) {
         super.paintComponent(gr);
-        solver.recalcBodiesCoords();
         drawRandomPoints(gr);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        if (consumedMillis >= durationMillis) {
-            timer.stop();
-            return;
-        }
-
-        consumedMillis += timer.getDelay();
-        repaint();
     }
 }
