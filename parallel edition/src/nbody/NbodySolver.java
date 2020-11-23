@@ -2,7 +2,6 @@ package nbody;
 
 import nbody.exceptions.BodiesNumOutOfBoundsException;
 
-import java.util.ArrayList;
 import java.util.concurrent.*;
 
 import static nbody.NbodySolvers.*;
@@ -17,7 +16,7 @@ public class NbodySolver {
     private final int[][] movingRanges;
 
     private final ExecutorService executor;
-    private final ArrayList<Future<Void>> recalcingFutures;
+    private final Future[] recalcingFutures;
     private final Future[] movingFutures;
     private final Thread[] threads;
 
@@ -40,7 +39,7 @@ public class NbodySolver {
         movingRanges = Helpers.ranges(1, b.length, threads.length);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
-        recalcingFutures = new ArrayList<>(settings.threadsNum);
+        recalcingFutures = new Future[settings.threadsNum];
         movingFutures = new Future[settings.threadsNum];
     }
 
@@ -60,7 +59,7 @@ public class NbodySolver {
         movingRanges = Helpers.ranges(1, b.length, threads.length);
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
-        recalcingFutures = new ArrayList<>(settings.threadsNum);
+        recalcingFutures = new Future[settings.threadsNum];
         movingFutures = new Future[settings.threadsNum];
     }
 
@@ -89,10 +88,10 @@ public class NbodySolver {
         RecalcingCallable recalcing;
         for (int i = 0; i < recalcingRanges.length; i++) {
             recalcing = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
-            recalcingFutures.set(i, executor.submit(recalcing));
+            recalcingFutures[i] = executor.submit(recalcing);
         }
 
-        for (Future<Void> f : recalcingFutures) {
+        for (Future f : recalcingFutures) {
             try {
                 f.get();
             } catch (ExecutionException | InterruptedException e) {
