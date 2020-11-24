@@ -12,8 +12,8 @@ public class NbodySolver {
     private final int dt;
     private final double errorDistance;
 
-    private final int[][] recalcingRanges;
-    private final int[][] movingRanges;
+    private final RecalcingCallable[] recalcingCallables;
+    private final MovingCallable[] movingCallables;
 
     private final ExecutorService executor;
     private final Future[] recalcingFutures;
@@ -33,8 +33,15 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
-        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+        final int[][] recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        final int[][] movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+
+        recalcingCallables = new RecalcingCallable[recalcingRanges.length];
+        movingCallables = new MovingCallable[movingRanges.length];
+        for (int i = 0; i < recalcingRanges.length; i++) {
+            recalcingCallables[i] = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
+            movingCallables[i] = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
+        }
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new Future[settings.threadsNum];
@@ -52,8 +59,15 @@ public class NbodySolver {
         dt = settings.deltaTime;
         this.errorDistance = settings.errorDistance;
 
-        recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
-        movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+        final int[][] recalcingRanges = Helpers.ranges(0, b.length - 2, settings.threadsNum);
+        final int[][] movingRanges = Helpers.ranges(1, b.length, settings.threadsNum);
+
+        recalcingCallables = new RecalcingCallable[recalcingRanges.length];
+        movingCallables = new MovingCallable[movingRanges.length];
+        for (int i = 0; i < recalcingRanges.length; i++) {
+            recalcingCallables[i] = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
+            movingCallables[i] = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
+        }
 
         executor = Executors.newFixedThreadPool(settings.threadsNum);
         recalcingFutures = new Future[settings.threadsNum];
@@ -82,10 +96,8 @@ public class NbodySolver {
     }
 
     private void recalcBodiesForces() {
-        RecalcingCallable recalcing;
-        for (int i = 0; i < recalcingRanges.length; i++) {
-            recalcing = new RecalcingCallable(recalcingRanges[i][0], recalcingRanges[i][1]);
-            recalcingFutures[i] = executor.submit(recalcing);
+        for (int i = 0; i < recalcingCallables.length; i++) {
+            recalcingFutures[i] = executor.submit(recalcingCallables[i]);
         }
 
         for (Future f : recalcingFutures) {
@@ -98,10 +110,8 @@ public class NbodySolver {
     }
 
     private void moveNBodies() {
-        MovingCallable moving;
-        for (int i = 0; i < movingRanges.length; i++) {
-            moving = new MovingCallable(movingRanges[i][0], movingRanges[i][1]);
-            movingFutures[i] = executor.submit(moving);
+        for (int i = 0; i < movingCallables.length; i++) {
+            movingFutures[i] = executor.submit(movingCallables[i]);
         }
 
         for (Future f : movingFutures) {
