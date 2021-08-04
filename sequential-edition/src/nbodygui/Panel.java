@@ -56,6 +56,7 @@ public class Panel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (consumedMillis >= durationMillis) {
             timer.stop();
+            System.out.println(consumedMillis);
             return;
         }
 

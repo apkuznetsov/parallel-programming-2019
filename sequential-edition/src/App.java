@@ -18,7 +18,7 @@ public class App {
         final int parsedBodiesNum = (parser.bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : parser.bodiesNum();
         final double parsedBodyMass = (parser.bodyMass() == null) ? Bodies.DEFAULT_BODY_MASS : parser.bodyMass();
         final int parsedDeltaTime = (parser.deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : parser.deltaTime();
-        final double parsedErrorDistance = (parser.errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : parser.errorDistance() ;
+        final double parsedErrorDistance = (parser.errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : parser.errorDistance();
         final int parsedDurationMillis = (parser.durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : parser.durationMillis();
 
         final Dimension coordsBounds = new Dimension(parsedWidth - 100, parsedHeight - 100);
@@ -29,11 +29,6 @@ public class App {
 
         final Frame frame = new Frame(parsedWidth, parsedHeight, panel);
         frame.setVisible(true);
-
-        //final NbodySolver solver = new NbodySolver(pseudoEarthAndMoon(250, 200), NbodySolvers.DEFAULT_DELTA_TIME);
-        //final Panel panel = new Panel(solver, Panels.MAX_DURATION_MILLIS);
-        //final Frame frame = new Frame(Frames.DEFAULT_WIDTH, Frames.DEFAULT_HEIGHT, panel);
-        //frame.setVisible(true);
     }
 
     public static Coords[] randomCoordsArr(int num, Dimension coordsBounds) {

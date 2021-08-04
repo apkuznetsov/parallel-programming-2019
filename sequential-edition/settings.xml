@@ -2,7 +2,7 @@
 <settings>
     <width>500</width>
     <height>500</height>
-    <bodiesNum>3</bodiesNum>
+    <bodiesNum>4</bodiesNum>
     <bodyMass>1e10</bodyMass>
     <deltaTime>20</deltaTime>
     <durationSeconds>21</durationSeconds>

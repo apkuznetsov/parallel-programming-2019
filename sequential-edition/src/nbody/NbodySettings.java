@@ -33,10 +33,6 @@ public class NbodySettings {
             throw new ErrorDistanceOutOfBoundsException();
         }
 
-        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
-            throw new ThreadsNumOutOfBoundsException();
-        }
-
         this.bodyMass = bodyMass;
         this.deltaTime = deltaTime;
         this.errorDistance = errorDistance;
@@ -57,10 +53,6 @@ public class NbodySettings {
 
         if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
-        }
-
-        if (threadsNum < MIN_THREADS_NUM || threadsNum > MAX_THREADS_NUM) {
-            throw new ThreadsNumOutOfBoundsException();
         }
 
         this.deltaTime = deltaTime;

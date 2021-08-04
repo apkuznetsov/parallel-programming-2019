@@ -22,7 +22,7 @@ public class NbodySolver {
             throw new DeltaTimeOutOfBoundsException();
         }
 
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
         }
 
@@ -44,8 +44,8 @@ public class NbodySolver {
         if (deltaTime < MIN_DELTA_TIME || deltaTime > MAX_DELTA_TIME) {
             throw new DeltaTimeOutOfBoundsException();
         }
-        
-        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance> MAX_ERROR_DISTANCE) {
+
+        if (errorDistance < MIN_ERROR_DISTANCE || errorDistance > MAX_ERROR_DISTANCE) {
             throw new ErrorDistanceOutOfBoundsException();
         }
 
