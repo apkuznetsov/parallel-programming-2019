@@ -1,8 +1,3 @@
-import nbody.Bodies;
-import nbody.NbodySolvers;
-import nbodygui.Frames;
-import nbodygui.Panels;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +11,6 @@ public class AppSettingsParser {
     private static final String DELTA_TIME_TAG_NAME = "deltaTime";
     private static final String ERROR_DISTANCE_TAG_NAME = "errorDistance";
     private static final String DURATION_SECONDS_TAG_NAME = "durationSeconds";
-    private static final String THREADS_NUM_TAG_NAME = "threadsNum";
 
     private final String settingsXml;
 
@@ -94,16 +88,6 @@ public class AppSettingsParser {
         return durationMillis;
     }
 
-    public Integer threadsNum() {
-        Integer threadsNum;
-        try {
-            threadsNum = Integer.parseInt(value(THREADS_NUM_TAG_NAME));
-        } catch (NumberFormatException e) {
-            threadsNum = null;
-        }
-        return threadsNum;
-    }
-
     private String value(String tagName) {
         String[] left = settingsXml.split("<" + tagName + ">");
         if (left.length < 2) {
@@ -116,27 +100,5 @@ public class AppSettingsParser {
         }
 
         return leftAndRight[0];
-    }
-
-    public AppSettings parseSettings() {
-        final int parsedWidth = (width() == null) ? Frames.DEFAULT_WIDTH : width();
-        final int parsedHeight = (height() == null) ? Frames.DEFAULT_HEIGHT : height();
-        final int parsedBodiesNum = (bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : bodiesNum();
-        final double parsedBodyMass = (bodyMass() == null) ? Bodies.DEFAULT_BODY_MASS : bodyMass();
-        final int parsedDeltaTime = (deltaTime() == null) ? NbodySolvers.DEFAULT_DELTA_TIME : deltaTime();
-        final double parsedErrorDistance = (errorDistance() == null) ? NbodySolvers.DEFAULT_ERROR_DISTANCE : errorDistance();
-        final int parsedDurationMillis = (durationMillis() == null) ? Panels.DEFAULT_DURATION_MILLIS : durationMillis();
-        final int parsedThreadsNum = (threadsNum() == null) ? NbodySolvers.DEFAULT_THREADS_NUM : threadsNum();
-
-        return new AppSettings(
-                parsedWidth,
-                parsedHeight,
-                parsedBodiesNum,
-                parsedBodyMass,
-                parsedDeltaTime,
-                parsedErrorDistance,
-                parsedDurationMillis,
-                parsedThreadsNum
-        );
     }
 }

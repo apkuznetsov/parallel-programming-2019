@@ -16,10 +16,6 @@ public class NbodySolvers {
     public static final double MAX_ERROR_DISTANCE = 1e3;
     public static final double DEFAULT_ERROR_DISTANCE = MIN_ERROR_DISTANCE;
 
-    public static final int MIN_THREADS_NUM = 1;
-    public static final int MAX_THREADS_NUM = 64;
-    public static final int DEFAULT_THREADS_NUM = MIN_THREADS_NUM;
-
     private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
     private static final Coords optdMemAllocDp = new Coords(0.0, 0.0);
