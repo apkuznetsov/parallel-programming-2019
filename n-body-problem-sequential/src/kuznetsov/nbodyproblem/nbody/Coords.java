@@ -1,4 +1,4 @@
-package nbody;
+package kuznetsov.nbodyproblem.nbody;
 
 public class Coords {
 

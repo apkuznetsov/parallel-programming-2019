@@ -1,9 +1,9 @@
-package nbody;
+package kuznetsov.nbodyproblem.nbody;
 
-import nbody.exceptions.BodyMassOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbody.exceptions.BodyMassOutOfBoundsException;
 
-import static nbody.Bodies.MAX_BODY_MASS;
-import static nbody.Bodies.MIN_BODY_MASS;
+import static kuznetsov.nbodyproblem.nbody.Bodies.MAX_BODY_MASS;
+import static kuznetsov.nbodyproblem.nbody.Bodies.MIN_BODY_MASS;
 
 public class Body {
 

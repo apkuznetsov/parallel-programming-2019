@@ -1,24 +1,22 @@
-package nbodygui;
+package kuznetsov.nbodyproblem.nbodygui;
 
-import nbodygui.exceptions.HeightOutOfBoundsException;
-import nbodygui.exceptions.WidthOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbodygui.exceptions.HeightOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbodygui.exceptions.WidthOutOfBoundsException;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static nbodygui.Frames.*;
-
 public class Frame extends JFrame {
 
     public Frame(int width, int height, Panel panel) {
-        super(DEFAULT_TITLE);
+        super(Frames.DEFAULT_TITLE);
 
-        if (width < MIN_WIDTH || width > MAX_WIDTH) {
+        if (width < Frames.MIN_WIDTH || width > Frames.MAX_WIDTH) {
             throw new WidthOutOfBoundsException();
         }
 
-        if (height < MIN_HEIGHT || height > MAX_HEIGHT) {
+        if (height < Frames.MIN_HEIGHT || height > Frames.MAX_HEIGHT) {
             throw new HeightOutOfBoundsException();
         }
 

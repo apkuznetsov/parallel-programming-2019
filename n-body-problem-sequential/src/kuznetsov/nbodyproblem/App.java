@@ -1,8 +1,10 @@
-import nbody.*;
-import nbodygui.Frame;
-import nbodygui.Frames;
-import nbodygui.Panel;
-import nbodygui.Panels;
+package kuznetsov.nbodyproblem;
+
+import kuznetsov.nbodyproblem.nbody.*;
+import kuznetsov.nbodyproblem.nbodygui.Frame;
+import kuznetsov.nbodyproblem.nbodygui.Frames;
+import kuznetsov.nbodyproblem.nbodygui.Panel;
+import kuznetsov.nbodyproblem.nbodygui.Panels;
 
 import java.awt.*;
 import java.io.IOException;

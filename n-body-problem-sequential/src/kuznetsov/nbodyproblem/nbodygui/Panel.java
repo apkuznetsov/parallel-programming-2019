@@ -1,14 +1,14 @@
-package nbodygui;
+package kuznetsov.nbodyproblem.nbodygui;
 
-import nbody.NbodySolver;
-import nbodygui.exceptions.DurationMillisOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbody.NbodySolver;
+import kuznetsov.nbodyproblem.nbodygui.exceptions.DurationMillisOutOfBoundsException;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static nbodygui.Panels.*;
+import static kuznetsov.nbodyproblem.nbodygui.Panels.*;
 
 public class Panel extends JPanel implements ActionListener {
 

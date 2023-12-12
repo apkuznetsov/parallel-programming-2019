@@ -1,4 +1,4 @@
-package nbodygui;
+package kuznetsov.nbodyproblem.nbodygui;
 
 public class Frames {
 

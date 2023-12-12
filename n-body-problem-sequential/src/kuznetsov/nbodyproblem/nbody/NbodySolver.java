@@ -1,10 +1,10 @@
-package nbody;
+package kuznetsov.nbodyproblem.nbody;
 
-import nbody.exceptions.BodiesNumOutOfBoundsException;
-import nbody.exceptions.DeltaTimeOutOfBoundsException;
-import nbody.exceptions.ErrorDistanceOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbody.exceptions.BodiesNumOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbody.exceptions.DeltaTimeOutOfBoundsException;
+import kuznetsov.nbodyproblem.nbody.exceptions.ErrorDistanceOutOfBoundsException;
 
-import static nbody.NbodySolvers.*;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.*;
 
 public class NbodySolver {
 

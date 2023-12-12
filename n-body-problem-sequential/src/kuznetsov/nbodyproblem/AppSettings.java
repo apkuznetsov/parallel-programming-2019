@@ -1,3 +1,5 @@
+package kuznetsov.nbodyproblem;
+
 public class AppSettings {
 
     public final int width;
