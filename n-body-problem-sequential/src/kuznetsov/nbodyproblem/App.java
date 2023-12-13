@@ -1,12 +1,16 @@
 package kuznetsov.nbodyproblem;
 
-import kuznetsov.nbodyproblem.nbody.*;
+import kuznetsov.nbodyproblem.nbody.Bodies;
+import kuznetsov.nbodyproblem.nbody.Body;
+import kuznetsov.nbodyproblem.nbody.Coords;
+import kuznetsov.nbodyproblem.nbody.NbodySolver;
+import kuznetsov.nbodyproblem.nbody.NbodySolvers;
 import kuznetsov.nbodyproblem.nbodygui.Frame;
 import kuznetsov.nbodyproblem.nbodygui.Frames;
 import kuznetsov.nbodyproblem.nbodygui.Panel;
 import kuznetsov.nbodyproblem.nbodygui.Panels;
 
-import java.awt.*;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Random;
 

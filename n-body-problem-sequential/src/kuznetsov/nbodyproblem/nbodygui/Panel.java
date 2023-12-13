@@ -3,12 +3,17 @@ package kuznetsov.nbodyproblem.nbodygui;
 import kuznetsov.nbodyproblem.nbody.NbodySolver;
 import kuznetsov.nbodyproblem.nbodygui.exceptions.DurationMillisOutOfBoundsException;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static kuznetsov.nbodyproblem.nbodygui.Panels.*;
+import static kuznetsov.nbodyproblem.nbodygui.Panels.DEFAULT_POINTS_COLOR;
+import static kuznetsov.nbodyproblem.nbodygui.Panels.DEFAULT_POINTS_SIZE;
+import static kuznetsov.nbodyproblem.nbodygui.Panels.MAX_DURATION_MILLIS;
+import static kuznetsov.nbodyproblem.nbodygui.Panels.MIN_DURATION_MILLIS;
 
 public class Panel extends JPanel implements ActionListener {
 

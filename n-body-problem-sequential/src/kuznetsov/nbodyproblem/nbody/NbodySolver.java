@@ -4,7 +4,17 @@ import kuznetsov.nbodyproblem.nbody.exceptions.BodiesNumOutOfBoundsException;
 import kuznetsov.nbodyproblem.nbody.exceptions.DeltaTimeOutOfBoundsException;
 import kuznetsov.nbodyproblem.nbody.exceptions.ErrorDistanceOutOfBoundsException;
 
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.*;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_BODIES_NUM;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_DELTA_TIME;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_ERROR_DISTANCE;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_BODIES_NUM;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_DELTA_TIME;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_ERROR_DISTANCE;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.direction;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.distance;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.dp;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.dv;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.magnitude;
 
 public class NbodySolver {
 

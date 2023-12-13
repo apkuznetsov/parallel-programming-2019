@@ -1,6 +1,6 @@
 package kuznetsov.nbodyproblem.nbodygui;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class Panels {
 

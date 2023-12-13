@@ -3,7 +3,8 @@ package kuznetsov.nbodyproblem.nbodygui;
 import kuznetsov.nbodyproblem.nbodygui.exceptions.HeightOutOfBoundsException;
 import kuznetsov.nbodyproblem.nbodygui.exceptions.WidthOutOfBoundsException;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 

@@ -4,7 +4,10 @@ import kuznetsov.nbodyproblem.nbody.exceptions.BodyMassOutOfBoundsException;
 import kuznetsov.nbodyproblem.nbody.exceptions.DeltaTimeOutOfBoundsException;
 import kuznetsov.nbodyproblem.nbody.exceptions.ErrorDistanceOutOfBoundsException;
 
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.*;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_DELTA_TIME;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_ERROR_DISTANCE;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_DELTA_TIME;
+import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_ERROR_DISTANCE;
 
 public class NbodySettings {
 
