@@ -1,4 +1,4 @@
-package kuznetsov.nbodyproblem.nbodygui.exceptions;
+package kuznetsov.nbodyproblem.gui.exceptions;
 
 public class WidthOutOfBoundsException extends IndexOutOfBoundsException {
 }

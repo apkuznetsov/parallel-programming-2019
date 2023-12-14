@@ -1,6 +1,8 @@
-package kuznetsov.nbodyproblem.nbody;
+package kuznetsov.nbodyproblem.simulation;
 
-import static kuznetsov.nbodyproblem.nbody.Bodies.G;
+import kuznetsov.nbodyproblem.body.Body;
+
+import static kuznetsov.nbodyproblem.simulation.Bodies.G;
 
 public class NbodySolvers {
 

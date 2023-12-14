@@ -1,7 +1,7 @@
-package kuznetsov.nbodyproblem.nbodygui;
+package kuznetsov.nbodyproblem.gui;
 
-import kuznetsov.nbodyproblem.nbodygui.exceptions.HeightOutOfBoundsException;
-import kuznetsov.nbodyproblem.nbodygui.exceptions.WidthOutOfBoundsException;
+import kuznetsov.nbodyproblem.gui.exceptions.HeightOutOfBoundsException;
+import kuznetsov.nbodyproblem.gui.exceptions.WidthOutOfBoundsException;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;

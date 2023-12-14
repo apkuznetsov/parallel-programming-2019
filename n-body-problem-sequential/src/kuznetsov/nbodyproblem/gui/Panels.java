@@ -1,4 +1,4 @@
-package kuznetsov.nbodyproblem.nbodygui;
+package kuznetsov.nbodyproblem.gui;
 
 import java.awt.Color;
 

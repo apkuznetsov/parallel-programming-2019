@@ -1,4 +1,4 @@
-package kuznetsov.nbodyproblem.nbody;
+package kuznetsov.nbodyproblem.simulation;
 
 public class Bodies {
 

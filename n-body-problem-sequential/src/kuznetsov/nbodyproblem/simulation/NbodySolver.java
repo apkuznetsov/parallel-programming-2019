@@ -1,20 +1,21 @@
-package kuznetsov.nbodyproblem.nbody;
+package kuznetsov.nbodyproblem.simulation;
 
-import kuznetsov.nbodyproblem.nbody.exceptions.BodiesNumOutOfBoundsException;
-import kuznetsov.nbodyproblem.nbody.exceptions.DeltaTimeOutOfBoundsException;
-import kuznetsov.nbodyproblem.nbody.exceptions.ErrorDistanceOutOfBoundsException;
+import kuznetsov.nbodyproblem.body.Body;
+import kuznetsov.nbodyproblem.simulation.exceptions.BodiesNumOutOfBoundsException;
+import kuznetsov.nbodyproblem.simulation.exceptions.DeltaTimeOutOfBoundsException;
+import kuznetsov.nbodyproblem.simulation.exceptions.ErrorDistanceOutOfBoundsException;
 
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_BODIES_NUM;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_DELTA_TIME;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MAX_ERROR_DISTANCE;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_BODIES_NUM;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_DELTA_TIME;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.MIN_ERROR_DISTANCE;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.direction;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.distance;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.dp;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.dv;
-import static kuznetsov.nbodyproblem.nbody.NbodySolvers.magnitude;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MAX_BODIES_NUM;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MAX_DELTA_TIME;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MAX_ERROR_DISTANCE;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MIN_BODIES_NUM;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MIN_DELTA_TIME;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.MIN_ERROR_DISTANCE;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.direction;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.distance;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.dp;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.dv;
+import static kuznetsov.nbodyproblem.simulation.NbodySolvers.magnitude;
 
 public class NbodySolver {
 

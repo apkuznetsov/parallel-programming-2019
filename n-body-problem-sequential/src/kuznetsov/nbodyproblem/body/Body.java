@@ -1,9 +1,10 @@
-package kuznetsov.nbodyproblem.nbody;
+package kuznetsov.nbodyproblem.body;
 
-import kuznetsov.nbodyproblem.nbody.exceptions.BodyMassOutOfBoundsException;
+import kuznetsov.nbodyproblem.simulation.Coords;
+import kuznetsov.nbodyproblem.simulation.exceptions.BodyMassOutOfBoundsException;
 
-import static kuznetsov.nbodyproblem.nbody.Bodies.MAX_BODY_MASS;
-import static kuznetsov.nbodyproblem.nbody.Bodies.MIN_BODY_MASS;
+import static kuznetsov.nbodyproblem.simulation.Bodies.MAX_BODY_MASS;
+import static kuznetsov.nbodyproblem.simulation.Bodies.MIN_BODY_MASS;
 
 public class Body {
 
