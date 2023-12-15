@@ -1,13 +1,18 @@
-package kuznetsov.nbodyproblem.simulation;
+package kuznetsov.nbodyproblem.point;
 
-public class Coords {
+public class Point {
 
     private double x;
     private double y;
 
-    public Coords(double x, double y) {
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Point(Point point) {
+        this.x = point.x;
+        this.y = point.y;
     }
 
     public double x() {
@@ -23,7 +28,4 @@ public class Coords {
         this.y = y;
     }
 
-    public Coords clone() {
-        return new Coords(x, y);
-    }
 }

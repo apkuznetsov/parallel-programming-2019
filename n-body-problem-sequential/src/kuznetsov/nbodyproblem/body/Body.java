@@ -1,6 +1,6 @@
 package kuznetsov.nbodyproblem.body;
 
-import kuznetsov.nbodyproblem.simulation.Coords;
+import kuznetsov.nbodyproblem.point.Point;
 import kuznetsov.nbodyproblem.simulation.exceptions.BodyMassOutOfBoundsException;
 
 import static kuznetsov.nbodyproblem.simulation.Bodies.MAX_BODY_MASS;
@@ -9,41 +9,41 @@ import static kuznetsov.nbodyproblem.simulation.Bodies.MIN_BODY_MASS;
 public class Body {
 
     private final double m;
-    private final Coords p;
-    private final Coords v;
-    private final Coords f;
+    private final Point p;
+    private final Point v;
+    private final Point f;
 
-    public Body(Coords xyCoords, double mass) {
-        if (mass < MIN_BODY_MASS || mass > MAX_BODY_MASS) {
+    public Body(Point p, double m) {
+        if (m < MIN_BODY_MASS || m > MAX_BODY_MASS) {
             throw new BodyMassOutOfBoundsException();
         }
 
-        m = mass;
-        p = xyCoords.clone();
-        v = new Coords(0.0, 0.0);
-        f = new Coords(0.0, 0.0);
+        this.m = m;
+        this.p = new Point(p);
+        this.v = new Point(0.0, 0.0);
+        this.f = new Point(0.0, 0.0);
     }
 
-    public Body(Coords xyCoords, double mass, Coords v) {
-        if (mass < MIN_BODY_MASS || mass > MAX_BODY_MASS) {
+    public Body(Point p, double m, Point v) {
+        if (m < MIN_BODY_MASS || m > MAX_BODY_MASS) {
             throw new BodyMassOutOfBoundsException();
         }
 
-        m = mass;
-        p = xyCoords.clone();
-        this.v = v.clone();
-        f = new Coords(0.0, 0.0);
+        this.m = m;
+        this.p = new Point(p);
+        this.v = new Point(v);
+        this.f = new Point(0.0, 0.0);
     }
 
-    public Coords p() {
+    public Point p() {
         return p;
     }
 
-    public Coords v() {
+    public Point v() {
         return v;
     }
 
-    public Coords f() {
+    public Point f() {
         return f;
     }
 

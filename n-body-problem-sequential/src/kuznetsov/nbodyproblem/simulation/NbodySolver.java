@@ -1,6 +1,7 @@
 package kuznetsov.nbodyproblem.simulation;
 
 import kuznetsov.nbodyproblem.body.Body;
+import kuznetsov.nbodyproblem.point.Point;
 import kuznetsov.nbodyproblem.simulation.exceptions.BodiesNumOutOfBoundsException;
 import kuznetsov.nbodyproblem.simulation.exceptions.DeltaTimeOutOfBoundsException;
 import kuznetsov.nbodyproblem.simulation.exceptions.ErrorDistanceOutOfBoundsException;
@@ -23,7 +24,7 @@ public class NbodySolver {
     private final int dt;
     private final double errorDistance;
 
-    public NbodySolver(Coords[] bodiesCoords, double bodyMass, int deltaTime, double errorDistance) {
+    public NbodySolver(Point[] bodiesCoords, double bodyMass, int deltaTime, double errorDistance) {
 
         if (bodiesCoords.length < MIN_BODIES_NUM || bodiesCoords.length > MAX_BODIES_NUM) {
             throw new BodiesNumOutOfBoundsException();
@@ -90,7 +91,7 @@ public class NbodySolver {
     private void recalcBodiesForces() {
         double distance;
         double magnitude;
-        Coords direction;
+        Point direction;
 
         final int n = b.length;
         for (int k = 0; k < n - 1; k++) {
@@ -113,8 +114,8 @@ public class NbodySolver {
     }
 
     private void moveNBodies() {
-        Coords dv; // dv = f/m * dt
-        Coords dp; // dp = (v + dv/2) * dt
+        Point dv; // dv = f/m * dt
+        Point dp; // dp = (v + dv/2) * dt
 
         for (Body body : b) {
             dv = dv(body, dt);

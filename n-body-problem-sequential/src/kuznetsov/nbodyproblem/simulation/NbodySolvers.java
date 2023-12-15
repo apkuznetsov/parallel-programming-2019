@@ -1,6 +1,7 @@
 package kuznetsov.nbodyproblem.simulation;
 
 import kuznetsov.nbodyproblem.body.Body;
+import kuznetsov.nbodyproblem.point.Point;
 
 import static kuznetsov.nbodyproblem.simulation.Bodies.G;
 
@@ -18,9 +19,9 @@ public class NbodySolvers {
     public static final double MAX_ERROR_DISTANCE = 1e3;
     public static final double DEFAULT_ERROR_DISTANCE = MIN_ERROR_DISTANCE;
 
-    private static final Coords optdMemAllocDirection = new Coords(0.0, 0.0);
-    private static final Coords optdMemAllocDv = new Coords(0.0, 0.0);
-    private static final Coords optdMemAllocDp = new Coords(0.0, 0.0);
+    private static final Point optdMemAllocDirection = new Point(0.0, 0.0);
+    private static final Point optdMemAllocDv = new Point(0.0, 0.0);
+    private static final Point optdMemAllocDp = new Point(0.0, 0.0);
 
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
@@ -32,7 +33,7 @@ public class NbodySolvers {
         return G * b1.m() * b2.m() / Math.pow(b1b2distance, 2);
     }
 
-    public static Coords direction(Body b1, Body b2) {
+    public static Point direction(Body b1, Body b2) {
         optdMemAllocDirection.set(
                 b2.p().x() - b1.p().x(),
                 b2.p().y() - b1.p().y());
@@ -40,7 +41,7 @@ public class NbodySolvers {
         return optdMemAllocDirection;
     }
 
-    public static Coords dv(Body b, long dt) {
+    public static Point dv(Body b, long dt) {
         optdMemAllocDv.set(
                 b.f().x() / b.m() * dt,
                 b.f().y() / b.m() * dt);
@@ -48,7 +49,7 @@ public class NbodySolvers {
         return optdMemAllocDv;
     }
 
-    public static Coords dp(Body b, long dt, Coords dv) {
+    public static Point dp(Body b, long dt, Point dv) {
         optdMemAllocDp.set(
                 (b.v().x() + dv.x() / 2) * dt,
                 (b.v().y() + dv.y() / 2) * dt
