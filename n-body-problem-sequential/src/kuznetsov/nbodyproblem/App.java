@@ -55,7 +55,7 @@ public class App {
 
     public static Body[] pseudoEarthAndMoon(double x, double y) {
         Body earth = new Body(new Point(x, y), 6e10);
-        Body moon = new Body(new Point(earth.p().x(), earth.p().y() + 300), 6e4, new Point(0.02, 0.0));
+        Body moon = new Body(new Point(earth.getPoint().x(), earth.getPoint().y() + 300), 6e4);
         return new Body[]{earth, moon};
     }
 }

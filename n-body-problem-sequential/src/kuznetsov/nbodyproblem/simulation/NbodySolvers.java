@@ -25,34 +25,34 @@ public class NbodySolvers {
 
     public static double distance(Body b1, Body b2) {
         return Math.sqrt(
-                Math.pow(b1.p().x() - b2.p().x(), 2) + Math.pow(b1.p().y() - b2.p().y(), 2)
+                Math.pow(b1.getPoint().x() - b2.getPoint().x(), 2) + Math.pow(b1.getPoint().y() - b2.getPoint().y(), 2)
         );
     }
 
     public static double magnitude(Body b1, Body b2, double b1b2distance) {
-        return G * b1.m() * b2.m() / Math.pow(b1b2distance, 2);
+        return G * b1.getM() * b2.getM() / Math.pow(b1b2distance, 2);
     }
 
     public static Point direction(Body b1, Body b2) {
         optdMemAllocDirection.set(
-                b2.p().x() - b1.p().x(),
-                b2.p().y() - b1.p().y());
+                b2.getPoint().x() - b1.getPoint().x(),
+                b2.getPoint().y() - b1.getPoint().y());
 
         return optdMemAllocDirection;
     }
 
     public static Point dv(Body b, long dt) {
         optdMemAllocDv.set(
-                b.f().x() / b.m() * dt,
-                b.f().y() / b.m() * dt);
+                b.getF().x() / b.getM() * dt,
+                b.getF().y() / b.getM() * dt);
 
         return optdMemAllocDv;
     }
 
     public static Point dp(Body b, long dt, Point dv) {
         optdMemAllocDp.set(
-                (b.v().x() + dv.x() / 2) * dt,
-                (b.v().y() + dv.y() / 2) * dt
+                (b.getV().x() + dv.x() / 2) * dt,
+                (b.getV().y() + dv.y() / 2) * dt
         );
 
         return optdMemAllocDp;

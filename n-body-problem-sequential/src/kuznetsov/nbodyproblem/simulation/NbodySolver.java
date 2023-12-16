@@ -76,11 +76,11 @@ public class NbodySolver {
     }
 
     public int bodyX(int index) {
-        return (int) b[index].p().x();
+        return (int) b[index].getPoint().x();
     }
 
     public int bodyY(int index) {
-        return (int) b[index].p().y();
+        return (int) b[index].getPoint().y();
     }
 
     public void recalcBodiesCoords() {
@@ -101,13 +101,13 @@ public class NbodySolver {
                 direction = direction(b[k], b[l]);
 
                 b[k].setF(
-                        b[k].f().x() + magnitude * direction.x() / distance,
-                        b[k].f().y() + magnitude * direction.y() / distance
+                        b[k].getF().x() + magnitude * direction.x() / distance,
+                        b[k].getF().y() + magnitude * direction.y() / distance
                 );
 
                 b[l].setF(
-                        b[l].f().x() - magnitude * direction.x() / distance,
-                        b[l].f().y() - magnitude * direction.y() / distance
+                        b[l].getF().x() - magnitude * direction.x() / distance,
+                        b[l].getF().y() - magnitude * direction.y() / distance
                 );
             }
         }
@@ -122,13 +122,13 @@ public class NbodySolver {
             dp = dp(body, dt, dv);
 
             body.setV(
-                    body.v().x() + dv.x(),
-                    body.v().y() + dv.y()
+                    body.getV().x() + dv.x(),
+                    body.getV().y() + dv.y()
             );
 
-            body.setP(
-                    body.p().x() + dp.x(),
-                    body.p().y() + dp.y()
+            body.setPoint(
+                    body.getPoint().x() + dp.x(),
+                    body.getPoint().y() + dp.y()
             );
 
             body.setF(0.0, 0.0);
