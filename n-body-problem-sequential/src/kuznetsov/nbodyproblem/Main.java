@@ -9,16 +9,17 @@ import kuznetsov.nbodyproblem.point.Point;
 import kuznetsov.nbodyproblem.simulation.Bodies;
 import kuznetsov.nbodyproblem.simulation.NbodySolver;
 import kuznetsov.nbodyproblem.simulation.NbodySolvers;
+import kuznetsov.nbodyproblem.simulationparser.SimulationParser;
 
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Random;
 
-public class App {
+public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        final AppSettingsParser parser = new AppSettingsParser();
+        final SimulationParser parser = new SimulationParser();
         final int parsedWidth = (parser.width() == null) ? Frames.DEFAULT_WIDTH : parser.width();
         final int parsedHeight = (parser.height() == null) ? Frames.DEFAULT_HEIGHT : parser.height();
         final int parsedBodiesNum = (parser.bodiesNum() == null) ? NbodySolvers.DEFAULT_BODIES_NUM : parser.bodiesNum();

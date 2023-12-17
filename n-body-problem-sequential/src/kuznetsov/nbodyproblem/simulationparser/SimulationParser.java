@@ -1,10 +1,10 @@
-package kuznetsov.nbodyproblem;
+package kuznetsov.nbodyproblem.simulationparser;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class AppSettingsParser {
+public class SimulationParser {
 
     private static final String WIDTH_TAG_NAME = "width";
     private static final String HEIGHT_TAG_NAME = "height";
@@ -16,7 +16,7 @@ public class AppSettingsParser {
 
     private final String settingsXml;
 
-    public AppSettingsParser() throws IOException {
+    public SimulationParser() throws IOException {
         settingsXml = new String(Files.readAllBytes(Path.of("settings.xml")));
     }
 
