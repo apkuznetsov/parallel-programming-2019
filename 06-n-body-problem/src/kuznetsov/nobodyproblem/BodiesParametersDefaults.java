@@ -26,7 +26,7 @@ public class BodiesParametersDefaults {
 
     // duration millis
     public static final int MIN_DURATION_MILLIS = 10_000;
-    public static final int MAX_DURATION_MILLIS = 3_600_000;
+    public static final int MAX_DURATION_MILLIS = 2_100_000_000;
 
     // threads
     public static final int MIN_THREADS_NUM = 1;
