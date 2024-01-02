@@ -7,7 +7,7 @@ public class Physics {
 
     public static final double G = 6.67e-11;
 
-    public static double gravity(double m1, double m2, double r) {
+    public static double gravityMagnitude(double m1, double m2, double r) {
         return G * m1 * m2 / Math.pow(r, 2);
     }
 
