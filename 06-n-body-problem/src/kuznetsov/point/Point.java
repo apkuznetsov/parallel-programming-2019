@@ -1,4 +1,4 @@
-package kuznetsov.nbodyproblem.point;
+package kuznetsov.point;
 
 public class Point {
 
@@ -23,7 +23,7 @@ public class Point {
         return y;
     }
 
-    public void set(double x, double y) {
+    public void setP(double x, double y) {
         this.x = x;
         this.y = y;
     }
