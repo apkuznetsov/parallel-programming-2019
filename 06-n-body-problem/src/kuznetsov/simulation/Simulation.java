@@ -10,6 +10,6 @@ public interface Simulation {
 
     Point p(int index);
 
-    void recompute();
+    void compute();
 
 }
