@@ -1,6 +1,7 @@
 package kuznetsov.nobodyproblem;
 
 import kuznetsov.physics.Body;
+import kuznetsov.physics.BodyGenerator;
 import kuznetsov.physics.Physics;
 import kuznetsov.point.Point;
 import kuznetsov.point.Points;
@@ -8,14 +9,14 @@ import kuznetsov.simulation.Simulation;
 
 public class BodiesSimulation implements Simulation {
 
-    private final int dt;
     private final Body[] bodies;
+    private final int dt;
     private final double eps;
 
-    public BodiesSimulation(BodiesParameters params) {
-        this.dt = params.dt();
-        this.bodies = BodiesSimulations.generateBodies(params);
-        this.eps = params.eps();
+    public BodiesSimulation(BodyGenerator generator, int dt, double eps) {
+        this.bodies = generator.generateBodies();
+        this.dt = dt;
+        this.eps = eps;
     }
 
     public int dt() {
@@ -30,7 +31,7 @@ public class BodiesSimulation implements Simulation {
         return bodies[index].p();
     }
 
-    public void recompute() {
+    public void compute() {
         computeForces();
         computeMoves();
     }
@@ -45,7 +46,7 @@ public class BodiesSimulation implements Simulation {
                 Body other = bodies[j];
 
                 double distance = Points.distance(curr.p(), other.p());
-                double magnitude = (distance < eps) ? 0.0 : Physics.gravity(curr.m(), other.m(), distance);
+                double magnitude = (distance < eps) ? 0.0 : Physics.gravityMagnitude(curr.m(), other.m(), distance);
                 Point direction = Points.direction(curr.p(), other.p());
                 double dfx = magnitude * direction.x() / distance;
                 double dfy = magnitude * direction.y() / distance;
