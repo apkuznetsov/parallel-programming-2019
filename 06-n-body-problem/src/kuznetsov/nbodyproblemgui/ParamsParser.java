@@ -31,13 +31,9 @@ public class ParamsParser {
         }
 
         try {
-            String str = new String(
-                    Files.readAllBytes(Path.of(fileName))
-            );
+            String str = new String(Files.readAllBytes(Path.of(fileName)));
+            return new BodiesParameters(n(str), m(str), dt(str), eps(str), width(str), height(str), durationMillis(str), threadsNum(str));
 
-            return new BodiesParameters(
-                    n(str), m(str), dt(str), eps(str), width(str), height(str), durationMillis(str), threadsNum(str)
-            );
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
