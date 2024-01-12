@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <width>1920</width>
+    <height>1080</height>
+    <durationSeconds>2000000</durationSeconds>
+    <deltaTime>20</deltaTime>
+    <bodiesNum>500</bodiesNum>
+    <bodyMass>1e10</bodyMass>
+    <errorDistance>1e2</errorDistance>
+</settings>
